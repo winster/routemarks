@@ -47,7 +47,7 @@
 					<a href="/home" style="text-decoration: none;"><img src="assets/img/logo.png" alt="Makes your route safe"><span class="logo">ROUTEMARKS</span></a>
 				</div>
 				<div class="welcomebar">
-					<a href="#login" data-toggle="modal">login</a>
+					<a href="#login" data-toggle="modal">ID</a>
 				</div>
 			</div>
 		</div>              
@@ -184,7 +184,7 @@
 	<div id="login" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 	  <div class="modal-header">
 	    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button>
-	    <h3 id="myModalLabel">login</h3>
+	    <h3 id="myModalLabel">login for ID card</h3>
 	  </div>
 	  <div class="modal-body">
 	  	<section class="loginsection">
