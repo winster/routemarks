@@ -1,0 +1,467 @@
+body {
+  /*padding-top: 20px;
+  padding-bottom: 40px;*/
+  background-color: #f0f8ff;
+}
+
+/* Custom container */
+.container-narrow {
+  margin: 0 auto;
+  max-width: 900px;
+  min-height: 520px;
+}
+.container-narrow > br {
+  margin: 20px 0;
+}
+
+
+
+/* Mini layout previews
+-------------------------------------------------- */
+.mini-layout {
+  border: 1px solid #ddd;
+  -webkit-border-radius: 6px;
+     -moz-border-radius: 6px;
+          border-radius: 6px;
+  -webkit-box-shadow: 0 1px 2px rgba(0,0,0,.075);
+     -moz-box-shadow: 0 1px 2px rgba(0,0,0,.075);
+          box-shadow: 0 1px 2px rgba(0,0,0,.075);
+}
+.mini-layout,
+.mini-layout .mini-layout-body,
+.mini-layout.fluid .mini-layout-sidebar {
+  height: 450px;
+}
+.mini-layout {
+  margin-bottom: 20px;
+  padding: 9px;
+}
+.mini-layout div {
+  -webkit-border-radius: 3px;
+     -moz-border-radius: 3px;
+          border-radius: 3px;
+}
+.mini-layout .mini-layout-body {
+  background-color: #dceaf4;
+  margin: 0 auto;
+  width: 90%;
+}
+.mini-layout.fluid .mini-layout-sidebar,
+.mini-layout.fluid .mini-layout-header,
+.mini-layout.fluid .mini-layout-body {
+  float: left;
+}
+.mini-layout.fluid .mini-layout-sidebar {
+  background-color: #bbd8e9;
+  width: 30%;
+}
+.mini-layout.fluid .mini-layout-body {
+  width: 67.5%;
+  margin-left: 2.5%;
+}
+
+
+/* Green card layout previews
+-------------------------------------------------- */
+.greencard-layout {
+  border: 1px solid #ddd;
+  -webkit-border-radius: 6px;
+     -moz-border-radius: 6px;
+          border-radius: 6px;
+  -webkit-box-shadow: 0 1px 2px rgba(0,0,0,.075);
+     -moz-box-shadow: 0 1px 2px rgba(0,0,0,.075);
+          box-shadow: 0 1px 2px rgba(0,0,0,.075);
+}
+.greencard-layout,
+.greencard-layout .greencard-layout-body,
+.greencard-layout.fluid .greencard-layout-sidebar {
+  height: 450px;
+}
+.greencard-layout {
+  margin-bottom: 20px;
+  padding: 9px;
+}
+.greencard-layout div {
+  -webkit-border-radius: 3px;
+     -moz-border-radius: 3px;
+          border-radius: 3px;
+}
+.greencard-layout .greencard-layout-body {
+  background-color: lightgreen;
+  margin: 0 auto;
+  width: 95%;
+}
+.greencard-layout.fluid .greencard-layout-sidebar,
+.greencard-layout.fluid .greencard-layout-header,
+.greencard-layout.fluid .greencard-layout-body {
+  float: left;
+}
+
+
+
+
+/* Footer
+-------------------------------------------------- */
+
+.footer {
+  padding: 10px 0;
+  /*margin-top: 10px;*/
+  border-top: 1px solid #e5e5e5;
+  font-size: 10px;
+  background: url("../img/f_bg.png") repeat;
+}
+.footer p {
+  margin-bottom: 0;
+  color: #777;
+  text-align:center;
+}
+.footer-links {
+  margin: 10px 0;
+}
+.footer-links li {
+  display: inline;
+  padding: 0 2px;
+}
+.footer-links li:first-child {
+  padding-left: 0;
+}
+
+
+/* Tablet
+------------------------- */
+@media (max-width: 767px) {
+  /* Remove any padding from the body */
+  body {
+    padding-top: 0;
+  }
+
+  /* Unfloat the back to top link in footer */
+  .footer {
+    margin-left: -20px;
+    margin-right: -20px;
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+  .footer p {
+    margin-bottom: 9px;
+  }
+}
+
+#map_canvas {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+}
+.mini-layout-sidebar-dl{
+  width:100%;
+}
+.mini-layout-sidebar-dt{
+  width:50%;
+}
+.mini-layout-sidebar-dd{
+  width:50%;
+}
+
+/*Login styles*/
+
+.form-horizontal{
+  /*height:200px;*/
+}
+.twitter-login-button{
+	display: block;
+	background-image: url("../img/sign-in-with-twitter-gray.png");
+	background-repeat: no-repeat;
+	width:158px;
+	height: 28px;
+}
+.notfound{
+	background-color: silver !important;
+}
+.infowindowcontent{
+	
+}
+.selectbox {
+	border:1px solid #000;
+	font-family: Georgia,Serif;
+	background-color: green;
+	color: white;
+}
+
+.mandatoryfield {
+	background-color: #BD362F;
+	color: white;
+}
+.selectbox option {
+	color: black;
+}
+
+.selectboxblue {
+	border:1px solid #000;
+	font-family: Georgia,Serif;
+	background-color: blue;
+	color: white;
+}
+
+.selectboxblue option {
+	color: black;
+}
+
+.news{
+	resize:none;
+}
+.captchalabel{
+	background-color: #F89406 !important;
+	color: white !important;
+}
+.data-submit{
+	display: none;
+}
+.infobox-wrapper {
+    display:none;
+}
+.infobox {
+    border:2px solid black;
+    margin-top: 8px;
+    background:#333;
+    color:#FFF;
+    font-family:Arial, Helvetica, sans-serif;
+    font-size:12px;
+    padding: .5em 1em;
+    -webkit-border-radius: 8px;
+    -moz-border-radius: 8px;
+    border-radius: 8px;
+    text-shadow:0 -1px #000000;
+    -webkit-box-shadow: 0 0  8px #000;
+    box-shadow: 0 0 8px #000;
+    text-align: center;
+}
+.markinfowindow{
+	border:2px solid silver;	
+	background:lightyellow;
+}
+#routes{
+	height: 50%;
+}
+.scrollablepane{
+	overflow: scroll;
+}
+.disabledDiv{
+	pointer-events: none;
+}
+.hidden{
+	display:none;
+}
+.filterdiv{
+	text-align: center;
+	margin-top: 25px;
+}
+.communityrow{
+	background-color: lightblue;
+	margin-bottom: 5px;	
+	-webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    border-radius: 4px;    
+}
+.communitylikerow{
+	background-color: lightyellow;
+	height:25px;
+}
+.profile{
+	color:blue;
+}
+.markdate{
+	text-align: center;
+   	padding-top: 10px;
+   	padding-right: 10px;
+}
+.manage-social {
+	min-height: 450px;
+}
+.updatedesc {
+	overflow: hidden;
+}
+.masthead{
+	width:100%;
+	height:60px;
+	background: url("../img/bg.png") repeat;
+}
+.mastheadcontent, .footercontent{
+	width:900px;
+	margin: 0 auto;
+}
+.masthead .navlinks a{
+	/*height: 19px;
+	padding-top: 55px;*/
+	color: black;
+}
+.masthead a {
+  color: white;
+  font-weight: bolder;
+  text-decoration: none;
+}
+.logo{
+	font-size: 20px;
+	color: white;
+	font-family: sans-serif;
+}
+
+.navlinks a:hover {
+  color: #51a351;
+  text-decoration: underline;
+}
+.welcomebar{
+	text-align: right;
+	padding-top: 1%;
+}
+.tabbar{
+}
+.aboutsection, .reportsection, .communitysection{
+	min-height: 450px;
+}
+.loginsection a img{
+	width:40px;
+	height:40px;
+}
+.useractions{
+	text-align: right;
+}
+.videotutorial{
+	text-align: center;
+}
+.aboutsectiondesc{
+	color: white;
+	margin-bottom: 20px;
+	background: #3ab6e8;
+	border: 1px solid #329dc8;
+	-webkit-border-radius: 4px;
+	-moz-border-radius: 4px;
+	border-radius: 4px;
+	-webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,0.05);
+	-moz-box-shadow: inset 0 1px 1px rgba(0,0,0,0.05);
+	box-shadow: inset 0 1px 1px rgba(0,0,0,0.05);
+	margin-bottom: 30px; 
+	margin-top: 10px;
+}
+.footerlinks a{
+	margin-right: 5px;
+	color: white;
+	float: right;
+}
+#androidapp {
+width: 50%;
+/*float: left;*/
+text-align: center;
+margin: 0 auto;
+}
+#forandroid {
+color: #333333;
+font-size: 16px;
+}
+.versions {
+	list-style: none;
+	padding: 0;
+}
+.versions li {
+border-radius: 8px;
+border-top: 1px solid #ccc;
+border-bottom: 1px solid #fff;
+margin: 10px;
+display: inline-block;
+padding: 10px 10px 0 10px;
+text-align: center;
+background: #e1e1e1;
+width: 280px;
+}
+#int_android a {
+background: #fff url("../img/google-play.png");
+background-position: 14px center;
+background-size: 36px;
+background-repeat: no-repeat;
+padding: 8px 14px 8px 64px;
+display: block;
+border-radius: 6px;
+color: #737578;
+text-shadow: 0px 1px 1px rgba(255,255,255,0.75);
+font-weight: bold;
+text-align: left;
+font-size: 1.2em;
+text-decoration: none;
+}
+.input-large {
+	width:80% !important;
+}
+.add-on{
+	/*width:10% !important;*/
+}
+#phonePromo{
+	font-size: 15px;
+	font-weight: bold;
+	text-align: center;
+	background: #3ab6e8;
+	border-top: 1px solid #329dc8;
+	box-shadow: 0px -1px 6px rgba(0, 0, 0, 0.3);
+	color: #fff;
+}
+#divider{
+	margin: 15px 0;
+	overflow: hidden;
+}
+#phonePromo .promoLink {
+	background: url('/img/phone.png') top left no-repeat;
+	cursor: pointer;
+	display: inline-block;
+	line-height: 36px;
+	padding-left: 32px;
+}
+#pitch {
+	/*height: 550px;
+	width:900px;
+	overflow: hidden;
+	margin: 0 auto;*/
+}
+#pitch #imageColumn {
+	-webkit-animation-name: fadeInAndDown;
+	-moz-animation-name: fadeInAndDown;
+	-o-animation-name: fadeInAndDown;
+	animation-name: fadeInAndDown;
+	-webkit-animation-fill-mode: both;
+	-moz-animation-fill-mode: both;
+	-ms-animation-fill-mode: both;
+	-o-animation-fill-mode: both;
+	animation-fill-mode: both;
+	-webkit-animation-duration: 0.3s;
+	-moz-animation-duration: 0.3s;
+	-ms-animation-duration: 0.3s;
+	-o-animation-duration: 0.3s;
+	animation-duration: 0.3s;
+	margin: 20px;
+	height: 550px;
+	background: url("../img/bigphone.png") no-repeat;
+}
+#pitch #textColumn {
+	font-weight: 400;
+	margin-top: 110px;
+}
+#pitch #textColumn #androidLink{
+	background: url("../img/google-play.png") no-repeat;
+	width: 100px;
+	height: 100px;
+	display: block;	
+}
+#pitch #textColumn h2 {
+	font-size: 26px;
+	letter-spacing: 0;
+	line-height: 29px;
+}
+#pitch #textColumn p {
+	font-size: 15px;
+	line-height: 17px;
+	text-align: justify;
+}
+#pitch #textColumn #deviceLogos {
+	clear: both;
+	height: 46px;
+	margin-top: 50px;
+	position: relative;
+	float: left;
+}
