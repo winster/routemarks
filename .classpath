@@ -1,7 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
 	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="src" path="Resources"/>
 	<classpathentry kind="con" path="com.google.appengine.eclipse.core.GAE_CONTAINER"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="con" path="com.google.gdt.eclipse.managedapis.MANAGED_API_CONTAINER/fusiontables-v1r21lv1.12.0-beta"/>
+	<classpathentry kind="lib" path="war/WEB-INF/lib/restfb-1.6.11.jar"/>
+	<classpathentry kind="lib" path="war/WEB-INF/lib/signpost-core-1.2.1.1.jar"/>
+	<classpathentry kind="lib" path="war/WEB-INF/lib/google-api-services-plus-v1-rev47-1.12.0-beta.jar"/>
+	<classpathentry kind="lib" path="war/WEB-INF/lib/lombok.jar"/>
+	<classpathentry kind="lib" path="war/WEB-INF/lib/httpclient-4.0.3.jar"/>
+	<classpathentry kind="lib" path="war/WEB-INF/lib/objectify-4.0b1.jar"/>
 	<classpathentry kind="output" path="war/WEB-INF/classes"/>
 </classpath>
