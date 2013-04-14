@@ -47,6 +47,7 @@ function initialize() {
         handleEnableDisable();
     });
     attachEventListeners();	
+    loadMarkerInfoWindowContent();
 }
 function autoCompleteField(place, input, infobox) {
 	marker.setVisible(false);
@@ -190,6 +191,14 @@ function attachEventListeners(){
 		$('#showroutetomark').hide();
 		handleEnableDisable(true);
 	});//Do not display route without users consent    
+	google.maps.event.addListener(map, 'click', function(event) {
+		if(this.getZoom()<17) {
+			this.setZoom(17);
+			map.setCenter(event.latLng);	    	
+		} else {
+			addMarker(event.latLng);
+		}
+    });
 }
 
 /**
@@ -281,6 +290,291 @@ function getLocationfromGoogle(latLng, callback) {
     });
 }
 /************Search marks ends here************************/
+/*****************Insert mark starts here*****************/
+function addMarker(location) {
+	var marker = new google.maps.Marker({
+		position: location,
+		map: map,
+		draggable : true,
+	});
+	var id = marker.__gm_id;
+	markers[id] = marker;
+	attachListenerToMarker(marker);
+	google.maps.event.addListener(marker, "rightclick", function (point) { 
+		id = this.__gm_id; 
+		delMarker(id); 
+	});
+}
+
+/**
+ * 
+ * @param id
+ */
+function delMarker(id) {
+    var marker = markers[id]; 
+    marker.setMap(null);
+}
+
+/**
+ * 
+ */
+function loadMarkerInfoWindowContent(){
+	$.ajax({
+		url : "assets/infoTemplate.html",
+		contentType : "text/html",
+		success : function(resp) {
+			infoWindowContent = resp;
+		},
+		error : function(jqXHR, textStatus, errorThrown) {
+			console.log("Error");
+		}
+	});  
+}
+
+/**
+ * 
+ * @param marker
+ */
+function attachListenerToMarker(marker) {
+	google.maps.event.addListener(marker, 'click', function () {
+		if(infowindow){
+			infowindow.close();
+		}
+		var clonedObj = $(infoWindowContent).clone()[0];
+		infowindow = getInfoBox(clonedObj,350, 1);
+		attachListenerToInfobox(marker, clonedObj);
+		
+		infowindow.open(map, this);
+    	map.panTo(this.getPosition());
+    });
+}
+/**
+ * 
+ * @param clonedObj
+ */
+function attachListenerToInfobox(marker, clonedObj){
+	$(clonedObj).find(".nextdiv").bind( "click", function(event) {
+    	navigateToSubmit(event);
+	});
+	$(clonedObj).find(".prevdiv").bind( "click", function(event) {
+    	navigateToData(event);
+	});
+	$(clonedObj).find(".category").bind( "change", function(event) {
+    	selectNatureElements(event);
+	});
+	$(clonedObj).find(".submitmarker").bind( "click", function(event) {
+    	if(validate(event)) {
+    		getLocationfromGoogle(marker.getPosition(), 
+    				function(geo_address){
+						insertMark(event, marker, geo_address.address_components);
+					}
+    		);    		
+    	}
+	});   
+}
+
+/**
+ * 
+ * @param event
+ * @param address_components
+ */
+function insertMark(event, marker, address_components){
+	var location = marker.getPosition().lat()+","+marker.getPosition().lng();
+	var category = $(event.target).parent().parent().find(".category").val();
+	var transportation = $(event.target).parent().parent().find(".transportation_types").val();
+	var reason = $(event.target).parent().parent().find(".reason_accident").val();
+	var severity = $(event.target).parent().parent().find(".severity").val();
+	if(category==='Natural Disaster') {
+		transportation= '';
+		reason = $(event.target).parent().parent().find(".reason_calamity").val();
+	}
+	var description = $(event.target).parent().parent().find(".news").val();
+	var data = {"location":location,
+				"category":category,"transportation":transportation,
+				"reason":reason,"severity":severity,
+				"description":description, "address":address_components};
+
+	$.post("markfn/insert",JSON.stringify(data))
+		.success(function(msg) {
+			//alert(msg);
+			$('.mini-layout').fadeTo('slow',1);
+			$('.mini-layout').removeClass('disabledDiv');
+			$('.markmessage').text('We have successfully stored your mark. Thank you!');
+			$('.markmessage').removeClass('text-warning');
+			$('.markmessage').addClass('text-success');
+			if(infowindow) {
+				infowindow.close();
+			}		 
+		})
+		.error(function() { 
+			$('.mini-layout').fadeTo('slow',1);
+			$('.mini-layout').removeClass('disabledDiv');
+			$('.markmessage').text('Error during save. Please try again.');
+			$('.markmessage').removeClass('text-warning');
+			$('.markmessage').addClass('text-error');
+		});
+}
+
+/**
+ * 
+ * @param event
+ */
+function navigateToSubmit(event) {
+	var parent = $(event.target).parent().parent().parent().parent();
+	$(parent).find(".captchaInput").val('');
+	reloadCaptchaDiv(parent);
+    $(event.target).parent().parent().parent().parent().children('.current').removeClass('current').hide()
+        .next().show().addClass('current');    
+}
+
+/**
+ * 
+ * @param event
+ */
+function navigateToData(event) {
+	$(event.target).parent().parent().children('.current').removeClass('current').hide()
+     				.prev().show().addClass('current');
+    if(!isOptionValid(event.target, ".category")){
+    	$(event.target).parent().parent().find(".category").addClass("mandatoryfield");
+	} else {
+		$(event.target).parent().parent().find(".category").removeClass("mandatoryfield");
+	}
+    if($(event.target).parent().parent().find(".transportation_types").is(":visible")){
+	    if(!isOptionValid(event.target, ".transportation_types")){
+	    	$(event.target).parent().parent().find(".transportation_types").addClass("mandatoryfield");
+		} else {
+			$(event.target).parent().parent().find(".transportation_types").removeClass("mandatoryfield");
+		}
+	}
+    if($(event.target).parent().parent().find(".reason_accident").is(":visible")){
+	    if(!isOptionValid(event.target, ".reason_accident")){
+	    	$(event.target).parent().parent().find(".reason_accident").addClass("mandatoryfield");
+		} else {
+			$(event.target).parent().parent().find(".reason_accident").removeClass("mandatoryfield");
+		}
+    }
+    if($(event.target).parent().parent().find(".reason_calamity").is(":visible")){
+	    if(!isOptionValid(event.target, ".reason_calamity")){
+	    	$(event.target).parent().parent().find(".reason_calamity").addClass("mandatoryfield");
+		} else {
+			$(event.target).parent().parent().find(".reason_calamity").removeClass("mandatoryfield");
+		}
+    }
+    if(!isOptionValid(event.target, ".severity")){
+    	$(event.target).parent().parent().find(".severity").addClass("mandatoryfield");
+	} else {
+		$(event.target).parent().parent().find(".severity").removeClass("mandatoryfield");
+	}
+}
+
+/**
+ * 
+ * @param event
+ * @returns {Boolean}
+ */
+function validate(event){
+	if(validateCaptcha($(event.target).parent().parent())){
+		if(isOptionValid(event.target, ".category") 
+				&& (isOptionValid(event.target, ".transportation_types") || 
+						$(event.target).parent().parent().find(".transportation_types").is(":hidden"))
+				&& (isOptionValid(event.target, ".reason_accident") ||  
+						isOptionValid(event.target, ".reason_calamity")) 
+				&& $(event.target).parent().parent().find(".severity").val().trim().length!==0){
+			$('.mini-layout').fadeTo('slow',.3);
+			$('.mini-layout').addClass("disabledDiv");
+			$('.markmessage').removeClass('text-error');
+			$('.markmessage').removeClass('text-success');
+			$('.markmessage').addClass('text-warning');
+			$('.markmessage').text('Saving your data...');
+			return true;
+		} else {
+			navigateToData(event);			
+		}
+	}
+	return false;
+}
+
+/**
+ * 
+ * @param target
+ * @param type
+ * @returns
+ */
+function isOptionValid(target, type){
+	var elm = $(target).parent().parent().find(type);
+	return isValid(elm);
+}
+
+/**
+ * 
+ * @param elm
+ * @returns {Boolean}
+ */
+function isValid(elm) {
+	if($(elm).val() == null || $(elm).val().trim().length==0) {
+		return false;
+	}else {
+		return true;
+	}	
+}
+
+/**
+ * 
+ * @param event
+ */
+function selectNatureElements(event) {
+	var selectedValue = $(".category option:selected").val();
+	
+	if(selectedValue==="Accident"){
+		$(".reason_calamity").hide();
+		$(".reason_accident").show();
+		$(".transportation_na").hide();
+		$(".transportation_types").show();
+	} else if(selectedValue==="Natural Disaster"){
+		$(".reason_accident").hide();
+		$(".reason_calamity").show();
+		$(".reason_calamity").removeClass("hidden");
+		$(".transportation_types").hide();
+		$(".transportation_na").show();
+		$(".transportation_na").removeClass("hidden");
+	}
+}
+
+/**
+ * 
+ * @param parent
+ * @returns {Boolean}
+ */
+function validateCaptcha(parent){
+	$(parent).find('.captchamessage').empty();
+	var d = $(parent).find('.captchaInput').val();
+	if (d == c) {
+		return true;
+	} else {
+		$(parent).find('.captchaInput').val("Wrong input. Try again!");
+		reloadCaptchaDiv(parent);		
+		return false;
+	}
+}
+var a,b,c;
+/**
+ * 
+ * @param parent
+ */
+function reloadCaptchaDiv(parent){
+	a = Math.ceil(Math.random() * 10);
+    b = Math.ceil(Math.random() * 10);       
+    c = a + b;
+    $(parent).find(".captchalabel").empty();
+    //$(parent).find(".captchaInput").val('');
+    $(parent).find(".captchaInput").focus(function() {
+        $(this).val('');
+    })
+    //$(".captchaInput").val("");
+    $(parent).find(".captchalabel").text("What is "+ a + " + " + b +"? ");
+}
+/*****************Insert mark ends here*******************/
+
 /************Community script starts here***************/
 /**
  * 

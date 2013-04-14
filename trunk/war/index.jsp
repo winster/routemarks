@@ -42,20 +42,18 @@
 	}(document, 'script', 'facebook-jssdk'));</script>
 
 	<div class="navbar navbar-inverse navbar-fixed-top masthead">
-		<div class="container-fluid">
-			<div class="row-fluid">
-				<div class="span10">
-					<a href="/" style="text-decoration: none;"><img src="assets/img/logo.png" alt="Makes your route safe"><span class="logo">ROUTEMARKS</span></a>
-				</div>
-				<div class="span2">			
-					<%if(session.getAttribute("userloginstatus")!=null){
-		                 String userName = ((AccountDetails)session.getAttribute("account")).getUserName();
-		             %>
-					<a href="#account"><%=userName%></a>
-				  	<%}else{ %>
-					<a href="#login" data-toggle="modal">ID Card</a>
-				  	<%}%>
-				</div>
+		<div class="row-fluid">
+			<div class="span10">
+				<a href="/" style="text-decoration: none;"><span class="logo">ROUTEMARKS</span></a>
+			</div>
+			<div class="span2">			
+				<%if(session.getAttribute("userloginstatus")!=null){
+	                 String userName = ((AccountDetails)session.getAttribute("account")).getUserName();
+	             %>
+				<a href="#account"><%=userName%></a>
+			  	<%}else{ %>
+				<a href="#login" data-toggle="modal">ID Card</a>
+			  	<%}%>
 			</div>
 		</div> 
     </div>
@@ -116,6 +114,9 @@
 						<div class="span6">
 							<span class="badge badge-info locationSelected">...</span>
 						</div>						
+					</div>
+					<div class="pull-left">
+						<span class="text-warning markmessage"></span>
 					</div>
 					<div class="pull-right">
 						<abbr title="eye witness"><i class="icon-eye-open"></i></abbr>
