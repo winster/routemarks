@@ -117,21 +117,22 @@
 					</div>
 					<div class="pull-left">
 						<span class="text-warning markmessage"></span>
+						<div class="nomarks hide"><code>No marks available here.</code></div>
+						<div class="alert fade in hide">
+						    <a class="close" data-dismiss="alert" href="#">&times;</a>
+						    <strong>Warning!</strong> Could not make a connection with server. Please refresh the page.  
+					    </div>
 					</div>
 					<div class="pull-right">
 						<abbr title="eye witness"><i class="icon-eye-open"></i></abbr>
 						<abbr title="I concur"><i class="icon-bell"></i></abbr>
 						<abbr title="fake information"><i class="icon-trash"></i></abbr>
 					</div>
-					<hr>
-					<div class="alert fade in hide">
-					    <a class="close" data-dismiss="alert" href="#">&times;</a>
-					    <strong>Warning!</strong> Could not make a connection with server. Please refresh the page.  
-				    </div>
+					<hr>					
 				    <div class="progress progress-striped active hide">
 				        <div class="bar" style="width: 0%;"></div>
 				    </div>
-				    <div class="nomarks hide"><code>No marks available here.</code></div>
+				    
 					<div class="communityUpdates"></div>
 					<div class="row-fluid show-grid morerow hide">
 						<div class="span12">			
