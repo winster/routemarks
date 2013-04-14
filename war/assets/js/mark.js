@@ -132,7 +132,7 @@ function deleteOverlays() {
 
 function loadMarkerInfoWindowContent(){
 	$.ajax({
-		url : "../templates/markerInfoWindow.html",
+		url : "assets/infoTemplate.html",
 		contentType : "text/html",
 		success : function(resp) {
 			infoWindowContent = resp;
