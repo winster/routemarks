@@ -814,6 +814,26 @@ function getCookie(name) {
     }
     return null;
 }
+
+/**
+ * 
+ * @param name
+ */
+function deleteCookie(name) {
+    setCookie(name,"",-1);
+}
+
+/**
+ * 
+ */
+function deleteAllCookies(){
+	var cookies = document.cookie.split(";");
+    for (var i = 0; i < cookies.length; i++) {   
+        var spcook =  cookies[i].split("=");
+        deleteCookie(spcook[0]);
+    }
+}
+
 /***Common script ends here***/
 
 function getDummyData() {
