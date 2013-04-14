@@ -1,0 +1,74 @@
+
+    <div class="markinfowindow">
+        <div class="data-entry current">
+			<div class="row show-grid">
+				<div class="span4">
+					<select class="selectbox span2 category" autofocus="autofocus">
+						<option value="" disabled="disabled" selected="selected" style="display:none">Choose Category</option>
+						<option value="Accident">Accident</option>
+						<option value="Natural Disaster">Natural Disaster</option>
+					</select>
+					<select class="selectbox span2 transportation_types">
+						<option value="" disabled="disabled" selected="selected" style="display:none">Select Transport Mode</option>
+						<option value="Bicycle">BiCycle</option>
+						<option value="Car">Car</option>
+						<option value="Motor Cycle">Motor Cycle</option>
+						<option value="Public Transport">Public Transport</option>
+						<option value="SUV">SUV</option>
+						<option value="Truck">Truck</option>
+						<option value="Train">Train</option>						
+					</select>
+					<select class="selectbox hidden span2 transportation_na">
+						<option value="" disabled="disabled" selected="selected" style="display:none">Not Applicable</option>
+					</select>
+				</div>	
+			</div>
+			<div class="row show-grid">
+				<div class="span4">
+					<textarea class="news span2" rows="2" placeholder="Enter a small description of the accident" maxlength="65"></textarea>
+					<button type="button" class="btn btn-primary nextdiv">Submit <i class="icon-forward"></i></button>
+				</div>
+			</div>
+			<div class="row show-grid">
+				<div class="span4">
+					<select class="selectbox span2 reason_accident">
+						<option value="" disabled="disabled" selected="selected" style="display:none">Select Reason</option>
+						<option value="Over speed">Over speed</option>
+						<option value="Reckless driving">Reckless driving</option>
+						<option value="Sharp Curve">Sharp Curve</option>
+						<option value="Traffic rule violation">Traffic rule violation</option>
+						<option value="Wrong message board">Wrong message board</option>
+						<option value="Ice road">Ice road</option>
+						<option value="Other">Other</option>
+					</select>
+					<select class="selectbox hidden span2 reason_calamity">
+						<option value="" disabled="disabled" selected="selected" style="display:none">Select Nature</option>
+						<option value="Avalanches and Landslides">Avalanche and Landslides</option>
+						<option value="Earthquake">Earthquake</option>
+						<option value="Hurricanes or Typhoons">Hurricane or Typhoon</option>
+						<option value="Tornadoes">Tornado</option>
+						<option value="Tsunamis">Tsunami</option>
+						<option value="Volcanic Eruptions">Volcanic Eruptions</option>
+						<option value="Other">Other</option>
+					</select>
+					<select class="selectbox span2 severity">
+						<option value="" disabled="disabled" selected="selected" style="display:none">Select Severity</option>
+						<option value="Critical">Critical</option>
+						<option value="Major">Major</option>
+						<option value="Minor">Minor</option>
+					</select>
+				</div>	
+			</div>
+		</div>
+		<div class="data-submit">
+			<button type="button" class="btn btn-small btn-info prevdiv pull-left"> <i class="icon-backward"></i> Back</button>
+			<div class="row show-grid">
+				<div class="span4 text-error">Please read policies before you submit. Please refrain<br> from submitting this mark, if you are unsure about the incident.</div>
+			</div>	
+			<div class="input-prepend pagination-centered">
+				<span class="add-on captchalabel"></span>
+				<input class="input-medium captchaInput" type="text" placeholder="Are you human?">
+			</div>				
+			<button type="button" class="btn btn-block btn-success submitmarker">Submit</button>				
+		</div>
+    </div>
