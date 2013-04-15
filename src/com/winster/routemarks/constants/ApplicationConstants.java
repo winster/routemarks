@@ -25,7 +25,7 @@ public enum ApplicationConstants {
 	GOOGLE_CALLBACK_URL("http://routemarks.com/socialAuth/callback?app=google"),
 	
 	TSR_HOME_URL("/home"),
-	TSR_ACCOUNT_URL("/account"),
+	TSR_ACCOUNT_URL("/"),
 	TSR_COMMUNITY_URL("/community"),
 	TSR_MARK_URL("/mark"),
 	
