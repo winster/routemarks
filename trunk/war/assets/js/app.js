@@ -585,9 +585,15 @@ function geoCodeLocation(){
     geocoder.geocode({ 'latLng': googlePosition}, function (results, status) {
     	if (status == google.maps.GeocoderStatus.OK) {
         	//console.log(results[0].formatted_address);
-    		requestServerForToken(results[0].address_components);
     		//Create anonymous user as a post loading process
-    	    createAnonymous();
+    		if(getCookie("firstvisit")==="true") {
+				    			createAnonymous(results[0].address_components).always(function(){
+				    				requestServerForToken(results[0].address_components);
+				    			}
+				    		);	
+    		} else{
+    			requestServerForToken(results[0].address_components);	
+    		}
         } else {
         	console.log('Google convertion is not succesfully done.');  
         }
@@ -858,21 +864,19 @@ function updateMark(data){
  * @param address_components
  */
 function createAnonymous(address_components){
-	if(getCookie("firstvisit")==="true") {
-		$.ajax({
-			  url:"user/anonymous",
-			  type:"POST",
-			  data:JSON.stringify(address_components),
-			  contentType:"application/json; charset=utf-8",
-			  dataType:"json",
-			  success: function(msg){
-				  console.log("successful");
-			  },
-			  error : function(){ 
-				  console.log('error while sending request!');
-			  } 
-			});
-	}
+	return $.ajax({
+		  url:"user/anonymous",
+		  type:"POST",
+		  data:JSON.stringify(address_components),
+		  contentType:"application/json; charset=utf-8",
+		  dataType:"json",
+		  success: function(msg){
+			  console.log("successful");
+		  },
+		  error : function(msg){ 
+			  console.log('error while sending request!'+msg);
+		  } 
+		});
 }
 
 /**********Community script ends here***********/
