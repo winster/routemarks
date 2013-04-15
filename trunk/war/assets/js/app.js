@@ -1,6 +1,6 @@
 $(document).ready(initialize);
 
-var layer, map, googlePosition, directionsService, infowindow, 
+var layer, map, googlePosition, directionsService, infoboxsmall, infowindow, 
 		infoWindowContent = null, markers = [], marker = new google.maps.Marker({ map: map	});
 var SWLAT,SWLNG,NELAT,NELNG;
 
@@ -18,7 +18,7 @@ function initialize() {
     };
     map = new google.maps.Map($('#map_canvas')[0],mapOptions);
     directionsRenderer.setMap(map);
-    infowindow = getInfoBox($(".infobox")[0], 280, 0.75);
+    infoboxsmall = getInfoBox($(".infobox")[0], 280, 0.75);
     if(navigator.geolocation) {
     	getGeoLocation();
     } else {
@@ -30,7 +30,7 @@ function initialize() {
     startautocomplete.bindTo('bounds', map);
 	google.maps.event.addListener(startautocomplete, 'place_changed', function() {
 		var place = startautocomplete.getPlace();
-		autoCompleteField(place, startinput, infowindow);
+		autoCompleteField(place, startinput, infoboxsmall);
         calcRoute();
         handleEnableDisable();
         $("#end").focus();
@@ -42,7 +42,7 @@ function initialize() {
     	$(".filterdiv").hide();
     	$(".details").hide();
     	var place = endautocomplete.getPlace();
-        autoCompleteField(place, endinput, infowindow);
+        autoCompleteField(place, endinput, infoboxsmall);
         calcRoute();
         handleEnableDisable();
     });
@@ -190,7 +190,8 @@ function attachEventListeners(){
 		calcRoute(null, true);
 		$('#showroutetomark').hide();
 		handleEnableDisable(true);
-	});//Do not display route without users consent    
+	});//Do not display route without users consent
+	$("#accountlink").click(userDetails);
 	google.maps.event.addListener(map, 'click', function(event) {
 		if(this.getZoom()<17) {
 			this.setZoom(17);
@@ -230,10 +231,10 @@ function getGeoLocation(){
 	navigator.geolocation.getCurrentPosition(function(position) {
 		googlePosition = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
 		map.setCenter(googlePosition);
-		if(infowindow) {//infowindow is null from mark screen and do not display infowindow in that case
-			infowindow.close();
+		if(infoboxsmall) {//infowindow is null from mark screen and do not display infowindow in that case
+			infoboxsmall.close();
 			var marker = new google.maps.Marker({ position: googlePosition});
-			infowindow.open(map, marker);
+			infoboxsmall.open(map, marker);
 			map.panTo(googlePosition);
 			geoCodeLocation();
 		}
@@ -952,6 +953,38 @@ function populateResult(data, type) {
 	}
 }
 /****Report Section Ends Here*****/
+
+/********Account details starts here**************/
+function userDetails(){	
+	$.getJSON('user/card', function(data) {
+		$("#username").text(data.userName);
+		$("#totalPoints").text(data.totalPoints);
+		if(data.recentActivity) {
+			$("#recentActivity").text(data.recentActivity.type +" "+data.recentActivity.desc);
+		} else {
+			$("#recentActivity").text("Not Available");;
+		}
+		$("#recentCriteria").text(data.recentCriteria);
+		$("#totalActivityCount").text(data.totalActivityCount);
+		$("#totalMarkCount").text(data.totalMarkCount);
+		$.getJSON('user/preferences', function(data) {
+			$.each(data, function(index, item) {
+				if(item.type==='socialconnected') {
+					if(item.value==='0') {
+						$(".manage-social input[type='checkbox']").attr('checked', false);
+					} else {
+						$(".manage-social input[type='checkbox']").attr('checked', true);
+						$(".manage-social input[type='text']").prop("disabled",true);
+						$(".manage-social input[type='text']").val("");
+					}
+				}
+			});		
+		}).always(function(){
+			$('#accountModal').modal('show');
+		});
+	});
+}
+/********Account details ends here****************/
 
 /** Common script starts here****/
 /**

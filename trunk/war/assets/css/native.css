@@ -48,11 +48,12 @@ body {
      -moz-box-shadow: 0 1px 2px rgba(0,0,0,.075);
           box-shadow: 0 1px 2px rgba(0,0,0,.075);
 }
+/*
 .greencard-layout,.greencard-layout .greencard-layout-body,.greencard-layout.fluid .greencard-layout-sidebar {
 	height: 450px;
-}
+}*/
 .greencard-layout {
-  	margin-bottom: 20px;
+  	/*margin-bottom: 20px;*/
   	padding: 9px;
 }
 .greencard-layout div {
@@ -207,14 +208,15 @@ body {
    	padding-top: 10px;
    	padding-right: 10px;
 }
+/*
 .manage-social {
 	min-height: 450px;
-}
+}*/
 .updatedesc {
 	overflow: hidden;
 }
 .masthead{
-	background: url("../img/bg.png") repeat;
+	background: url("../img/bg1.png") repeat;
 	line-height: 50px;
 	padding-left: 10px;
 }
@@ -235,8 +237,8 @@ body {
 	font-family: sans-serif;
 	margin: 10px;
 }
-.aboutsection{
-	min-height: 450px;
+.aboutsection, .disclaimersection, .policiessection{
+	min-height: 520px;
 }
 .loginsection a img{
 	width:40px;

@@ -1,5 +1,17 @@
 package com.winster.routemarks.rest.endpoint;
 
+import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.logging.Logger;
+
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import com.google.appengine.api.channel.ChannelService;
+import com.google.appengine.api.channel.ChannelServiceFactory;
 import com.winster.routemarks.client.vo.AccountDetails;
 import com.winster.routemarks.client.vo.ActivityData;
 import com.winster.routemarks.client.vo.GeocodeAddressComponents;
@@ -15,21 +27,7 @@ import com.winster.routemarks.rest.helper.AccountHelper;
 import com.winster.routemarks.rest.helper.ActivityHelper;
 import com.winster.routemarks.rest.helper.LocationHelper;
 import com.winster.routemarks.rest.helper.RequestHelper;
-import com.winster.routemarks.util.CookieUtil;
 import com.winster.routemarks.util.GoogleUtil;
-
-import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.logging.Logger;
-
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
-import com.google.appengine.api.channel.ChannelService;
-import com.google.appengine.api.channel.ChannelServiceFactory;
 
 /**
  * Interface for handling all community related activities
@@ -52,9 +50,11 @@ public class Community extends HttpServlet {
 			int limit = (int)NumeralConstants.COMMUNITY_MESSAGE_LIMIT.getValue();			
 			if(path.endsWith("list")) {
 				GeocodeAddressComponents[] addressComponents = LocationHelper.retriveGeoAddressFromRequest(req);
-				if(CookieUtil.getCookieValue(req, ApplicationConstants.TOKEN_FIRST_VISIT.getValue()).equals("true")) {
+				/*
+				 * Not required as community is no more a separate screen
+				 * if(CookieUtil.getCookieValue(req, ApplicationConstants.TOKEN_FIRST_VISIT.getValue()).equals("true")) {
 					createAnonymousUser(req, resp, addressComponents);
-				}
+				}*/
 				String id = RequestHelper.getSessionAttributeString(req, UserConstants.ATTR_ID.getValue());
 				String	clientId = RequestHelper.getSessionAttributeString(req, UserConstants.ATTR_CLIENT_ID.getValue());
 				String token = RequestHelper.getSessionAttributeString(req, UserConstants.ATTR_TOKEN_ID.getValue());
@@ -156,11 +156,11 @@ public class Community extends HttpServlet {
 	 * @param resp
 	 * @param addressComponents
 	 * @throws ServletException
-	 */
+	 
 	private void createAnonymousUser(HttpServletRequest req, HttpServletResponse resp, 
 												GeocodeAddressComponents[] addressComponents) throws ServletException {		
 		AccountHelper.createAnonymousUser(req, resp, addressComponents);
-	}	
+	}*/
 	
 	/**
 	 * 

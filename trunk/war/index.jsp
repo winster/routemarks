@@ -44,13 +44,13 @@
 	<div class="navbar navbar-inverse navbar-fixed-top masthead">
 		<div class="row-fluid">
 			<div class="span10">
-				<a href="/" style="text-decoration: none;"><span class="logo">ROUTEMARKS</span></a>
+				<a href="/" style="text-decoration: none;"><img src="assets/img/banner.png"></a>
 			</div>
 			<div class="span2">			
 				<%if(session.getAttribute("userloginstatus")!=null){
 	                 String userName = ((AccountDetails)session.getAttribute("account")).getUserName();
 	             %>
-				<a href="#account"><%=userName%></a>
+				<a href="#" id="accountlink"><%=userName%></a>
 			  	<%}else{ %>
 				<a href="#login" data-toggle="modal">ID Card</a>
 			  	<%}%>
@@ -212,11 +212,11 @@
 		   	 		<a target="_blank" href="http://winstertjose.com">winstertjose.com</a>&copy; 2012 
 		   		</div>
 				<div class="span4 pull-right footerlinks">
-					<a href="assets/about.html">about</a>
+					<a href="/assets/about.html">about</a>
 					<a target="_blank" href="https://docs.google.com/spreadsheet/viewform?formkey=dFdWai1JMmFKX1RCWTROMm1CZXltMWc6MA">feedback</a><!-- <a href="#feedback" data-toggle="modal">feedback</a> -->
-					<a href="assets/policies.html">policies</a> 
-					<a href="assets/disclaimer.html">disclaimer</a>
-					<a href="assets/help.html">help</a>			  
+					<a href="/assets/policies.html">policies</a> 
+					<a href="/assets/disclaimer.html">disclaimer</a>
+					<a href="/assets/help.html">help</a>			  
 				</div>		   
 		 	</div>
 		</div>	   	 
@@ -415,24 +415,27 @@
 		 </div>
 		 <div class="modal-body">
 		 	<section>
-				<div class="container-fluid">
-					<div class="row-fluid">
-						<!-- <div class="span6">Welcome <span id="username" class="text-info"></span></div>-->
-						<div class="offset6 span6 useractions">
-							<%
-								String accountType = null;
-								if(session.getAttribute("userloginstatus")!=null){
-									accountType = ((AccountDetails)session.getAttribute("account")).getAccountType();
-								}
-							%>								
-							<fieldset>
-								<%if(!"google".equals(accountType)) {%>						
-				            	<a href="managesocial">Manage <%=accountType%></a><br>
-								<!-- <a href="newgroup"><span>Create user group</span></a> -->
-								<%}%>					
-				            </fieldset>
+				<div class="row-fluid">
+					<%
+					String accountType = null;
+					if(session.getAttribute("userloginstatus")!=null){
+						accountType = ((AccountDetails)session.getAttribute("account")).getAccountType();
+					}
+					if(!"google".equals(accountType)) {%>						
+	            	<form class="manage-social" action="socialAuth/update" method="post">
+						<div class="row-fluid">
+							<div class="offset1 span6">
+								<label class="checkbox">
+									<input type="checkbox" name="toggleCheckbox"> Enable posting on <%=accountType%> page
+								</label>
+							</div>
+							<div class="offset3 span2">
+								<button type="submit" class="btn btn-primary">Submit</button>
+							</div>
 						</div>
-					</div>
+						<!-- <a href="newgroup"><span>Create user group</span></a> -->
+					</form>	
+					<%}%>
 				</div>
 				<div class="greencard-layout">
 					<div class="greencard-layout-body">
