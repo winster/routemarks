@@ -90,6 +90,7 @@ public class AccountHelper {
 		userDetails.setUserId(httpParameters.getFirst("user_id"));
 		userDetails.setUserName(httpParameters.getFirst("screen_name"));
 		userDetails.setAccountType(ApplicationConstants.ACCOUNT_TYPE_TWITTER.getValue());
+		userDetails.setPictureUrl("https://api.twitter.com/1/users/profile_image?screen_name="+userDetails.getUserName()+"&size=normal");
 		return userDetails;
 	}
 	
@@ -106,6 +107,7 @@ public class AccountHelper {
 		userDetails.setUserName(user.getName());
 		userDetails.setAccountType(ApplicationConstants.ACCOUNT_TYPE_FACEBOOK.getValue());
 		
+		userDetails.setPictureUrl("https://graph.facebook.com/"+user.getId()+"/picture");
 		userDetails.setFirstName(user.getFirstName());
 		userDetails.setGender(user.getGender());
 		userDetails.setLastName(user.getLastName());
@@ -129,6 +131,7 @@ public class AccountHelper {
 		userDetails.setUserId(profile.getId());
 		userDetails.setUserName(profile.getDisplayName());
 		userDetails.setAccountType(ApplicationConstants.ACCOUNT_TYPE_GOOGLE.getValue());
+		userDetails.setPictureUrl("https://plus.google.com/s2/photos/profile/"+profile.getId()+"?sz=50");
 		
 		return userDetails;
 	}

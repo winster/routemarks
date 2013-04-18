@@ -22,6 +22,8 @@ public @Data class AccountDetails implements Serializable {
 	private String locale;
 	private Date updatedTime;
 	
+	private String pictureUrl;
+	
 	private long totalMarkCount;
 	private long totalActivityCount;
 	private long totalPrefernceCount;	

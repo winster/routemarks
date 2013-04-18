@@ -49,8 +49,10 @@
 			<div class="span2">			
 				<%if(session.getAttribute("userloginstatus")!=null){
 	                 String userName = ((AccountDetails)session.getAttribute("account")).getUserName();
+	                 String userId = ((AccountDetails)session.getAttribute("account")).getUserId();
+	                 String picUrl = ((AccountDetails)session.getAttribute("account")).getPictureUrl();
 	             %>
-				<a href="#" id="accountlink"><%=userName%></a>
+				<a href="#" id="accountlink"><img src="<%=picUrl%>"><%=userName%></a>
 			  	<%}else{ %>
 				<a href="#login" data-toggle="modal">ID Card</a>
 			  	<%}%>
