@@ -30,7 +30,7 @@ function initialize() {
     startautocomplete.bindTo('bounds', map);
 	google.maps.event.addListener(startautocomplete, 'place_changed', function() {
 		var place = startautocomplete.getPlace();
-		autoCompleteField(place, startinput, infoboxsmall);
+		showSmallInfoBox(place, startinput, infoboxsmall);
         calcRoute();
         handleEnableDisable();
         $("#end").focus();
@@ -42,14 +42,28 @@ function initialize() {
     	$(".filterdiv").hide();
     	$(".details").hide();
     	var place = endautocomplete.getPlace();
-        autoCompleteField(place, endinput, infoboxsmall);
+        showSmallInfoBox(place, endinput, infoboxsmall);
         calcRoute();
         handleEnableDisable();
     });
     attachEventListeners();	
     loadMarkerInfoWindowContent();
+    
+    var params = getQueryParameters()
+    if(params) {
+    	showMarkOnMap(params);
+    }
+	
+    //loadUpdates(getDummyData());
 }
-function autoCompleteField(place, input, infobox) {
+
+/**
+ * 
+ * @param place
+ * @param input
+ * @param infobox
+ */
+function showSmallInfoBox( place, input, infobox) {
 	marker.setVisible(false);
     if (!place.geometry) {
     	// Inform the user that the place was not found and return.
@@ -247,7 +261,8 @@ function getGeoLocation(){
  * @param location
  * @returns
  */
-function showMarkOnMap(location){
+function showMarkOnMap(item){
+	var location = item["location"];
 	$(".details").hide();
 	var locs = location.split(",");
 	var pos = new google.maps.LatLng(locs[0],locs[1]);
@@ -269,6 +284,17 @@ function showMarkOnMap(location){
     		$('#showroutetomark').show();
 		});
 	});
+	if(layer) {
+		layer.setMap(null);
+	}
+	layer = new google.maps.FusionTablesLayer({
+    	query: {
+        	select: ' Location ',
+        	from: '19ZyjTyDCYccePHh_q-gYxP4oLfgS41lC_4oF1eA',
+        	where: "TSRId = '"+item["markId"]+"'"
+        }
+    });
+    layer.setMap(map);
 }
 
 /**
@@ -662,7 +688,7 @@ function onOpened(geo_address_components, message){
     google.maps.event.addListener(autocomplete, 'place_changed', function() {
         var place = autocomplete.getPlace();
         /*var infobox = getInfoBox($(".infobox")[0], 280, 0.75);
-        autoCompleteField(place, $("#location")[0], infobox);*/
+        showSmallInfoBox(place, $("#location")[0], infobox);*/
         $(".locationSelected").text(getLocationStringFromGeo(place.address_components));
         $.ajax({
   		  url:"communitytoken/criteria",
@@ -799,13 +825,53 @@ function fillUpdates(data) {
  * @param communityUpdate
  */
 function attachMessageActionsListeners(communityUpdate, item){
+	$(communityUpdate).find(".star").unbind('click');
 	$(communityUpdate).find(".star").click(starMark);
+	$(communityUpdate).find(".like").unbind('click');
 	$(communityUpdate).find(".like").click(likeMark);
-	$(communityUpdate).find(".dislike").click(dislikeMark);	
+	$(communityUpdate).find(".dislike").unbind('click');
+	$(communityUpdate).find(".dislike").click(dislikeMark);
+	$(communityUpdate).find(".profile a").unbind('click');
 	$(communityUpdate).find(".profile a").click(
 											function(){
-												showMarkOnMap(item.location);
+												showMarkOnMap(item);
 											});
+	var url = "http://routemarks.com?mark="+item["markId"]+"&loc="+item["location"];
+	$(communityUpdate).find(".copyclipbtn").unbind('click');
+	$(communityUpdate).find(".copyclipbtn").click(function(){
+													copyToClipBoard(url);
+												});
+	$(communityUpdate).find(".sharefb").unbind('click');
+	$(communityUpdate).find(".sharefb").click(function(){
+													postToFeed(url);
+												});
+	$(communityUpdate).find(".tweet").unbind('click');
+	$(communityUpdate).find(".tweet").click(function(){
+											popUpTwitter("https://twitter.com/share");
+												});	
+	var span =  $(communityUpdate).find(".NameHighlights")[0];
+	var t;
+    span.onmouseover = function () {
+        hideAll();
+        clearTimeout(t);
+        this.className = 'NameHighlightsHover';
+    };
+    span.onmouseout = function () {
+        var self = this;
+        t = setTimeout(function () {
+            self.className = 'NameHighlights';
+        }, 300);
+    };
+}
+
+/**
+ * Hide all other popups
+ */
+function hideAll() {
+	var span = $('.NameHighlights');
+    for (var i = span.length; i--;) {
+        span[i].className = 'NameHighlights'; 
+    }
 }
 
 /**
@@ -1032,51 +1098,6 @@ function handleNoGeolocation(errorFlag) {
 	map.setCenter(new google.maps.LatLng(40.714353, -74.005973));
 }
 
-/**
- * 
- * @param map
- * @param place
- * @param input
- * @param infobox
- * @param marker
- */
-function autoCompleteField( place, input, infobox) {
-	marker.setVisible(false);
-    if (!place.geometry) {
-    	// Inform the user that the place was not found and return.
-    	$(input).addClass('notfound');
-    	return;
-    } else {
-    	$(input).removeClass('notfound');
-    }
-    // If the place has a geometry, then present it on a map.
-    if (place.geometry.viewport) {
-    	map.fitBounds(place.geometry.viewport);
-    	map.setZoom(15);
-    } else {
-    	map.setCenter(place.geometry.location);
-    	map.setZoom(15);  // Why 17? Because it looks good.
-    }
-    var image = new google.maps.MarkerImage(
-    		place.icon,
-    		new google.maps.Size(71, 71),
-    		new google.maps.Point(0, 0),
-    		new google.maps.Point(17, 34),
-    		new google.maps.Size(35, 35));
-    marker.setIcon(image);
-    marker.setPosition(place.geometry.location);
-
-    var address = '';
-    if (place.address_components) {
-    	address = [
-    	           (place.address_components[0] && place.address_components[0].short_name || ''),
-    	           (place.address_components[1] && place.address_components[1].short_name || ''),
-    	           (place.address_components[2] && place.address_components[2].short_name || '')
-    	           ].join(' ');
-    }
-    $(infobox.content_).html('<div><strong>' + place.name + '</strong><br>' + address);
-    infobox.open(map, marker);
-}
 
 /**
  * Utility method to get date 0: today, -1: yesterday, 7: lastweek, -30: last month, -365 : last year
@@ -1181,11 +1202,45 @@ function deleteAllCookies(){
     }
 }
 
+/**
+ * 
+ * @param text
+ */
+function copyToClipBoard (text) {
+	window.prompt ("Copy to clipboard: Ctrl+C, Enter", text);
+}
+
+/**
+ * 
+ * @returns
+ */
+function getQueryParam(name){
+  name = name.replace(/[\[]/, "\\\[").replace(/[\]]/, "\\\]");
+  var regexS = "[\\?&]" + name + "=([^&#]*)";
+  var regex = new RegExp(regexS);
+  var results = regex.exec(window.location.search);
+  if(results == null)
+	  return null;
+  else
+	  return decodeURIComponent(results[1].replace(/\+/g, " "));
+}
+
+/**
+ * 
+ * @returns
+ */
+function getQueryParameters(){
+	var mark = getQueryParam("mark");
+	var loc = getQueryParam("loc");
+	if(mark && loc) {
+		return {markId:mark, location:loc};
+	} else  return null;
+}
 /***Common script ends here***/
 
 function getDummyData() {
-	var data = {loadType:'reload',updates:[{markId:"101", location:'10.115253001463541,76.50215864181519', starCount:"2",likeCount:"3",dislikeCount:"6",username:"Winster",countrycode:"IN",locality:"Kelakam",category:"Accident",transportation:"Car",nature:"Traffic rule violation",severity:"critical",description:"It was a mistake from truck driver that took lives of 3."},
-	  	               {markId:"102",starCount:"2",likeCount:"3",dislikeCount:"6",username:"Jose",countrycode:"US",locality:"Columbia",category:"Disaster",transportation:"Public Transport",nature:"Wrong message board",severity:"major",description:"Correct the message board."}]};
+	var data = {loadType:'reload',updates:[{markId:"eed0c3a7-0240-4e5a-aac0-069e8e7330a7", location:'8.488029604845561,76.94859087467194', starCount:"2",likeCount:"3",dislikeCount:"6",username:"Winster",countrycode:"IN",locality:"Kelakam",category:"Accident",transportation:"Car",nature:"Traffic rule violation",severity:"critical",description:"It was a mistake from truck driver that took lives of 3."},
+	  	               {markId:"84190cc9-af35-473f-b486-86d4e98ac212", location:'10.115253001463541,76.50215864181519', starCount:"2",likeCount:"3",dislikeCount:"6",username:"Jose",countrycode:"US",locality:"Columbia",category:"Disaster",transportation:"Public Transport",nature:"Wrong message board",severity:"major",description:"Correct the message board."}]};
 	//var message = {data:data};
 	return data;
 }

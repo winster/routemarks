@@ -1,6 +1,15 @@
 <div class="row-fluid show-grid communityrow">
 	<div class="span2 profile">
-		#{username}<br>(<a>#{countrycode} &middot; #{locality}</a>)
+		#{username}<br>(<span class="NameHighlights">
+    						<a>#{countrycode} &middot; #{locality}</a>
+						    <div class="copyclipContainer">
+						        <div class="btn-group">
+						        	<button class="btn btn-primary sharefb">share</button>
+						        	<a class="btn btn-primary tweet" data-lang="en">tweet</a>
+						        	<button class="btn btn-primary copyclipbtn">copy to clipboard</button>						        	
+						        </div>
+						    </div>
+						</span>)
 	</div>
 	<div class="span10 updatedesc">
 		#{category} &middot; #{transportation} &middot; #{nature} &middot; #{severity} &middot; #{description}

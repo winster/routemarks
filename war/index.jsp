@@ -1,6 +1,7 @@
 <%@ page import="com.winster.routemarks.client.vo.AccountDetails" %>
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns="http://www.w3.org/1999/xhtml"
+  xmlns:fb="https://www.facebook.com/2008/fbml">
    <head prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# routemarks: http://ogp.me/ns/fb/routemarks#">
     <meta charset="utf-8">
     <title>ROUTEMARKS</title>
@@ -32,15 +33,6 @@
   
   <body>
 	
-	<div id="fb-root"></div>
-	<script>(function(d, s, id) {
-	  var js, fjs = d.getElementsByTagName(s)[0];
-	  if (d.getElementById(id)) return;
-	  js = d.createElement(s); js.id = id;
-	  js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=485688004787851";
-	  fjs.parentNode.insertBefore(js, fjs);
-	}(document, 'script', 'facebook-jssdk'));</script>
-
 	<div class="navbar navbar-inverse navbar-fixed-top masthead">
 		<div class="row-fluid">
 			<div class="span10">
@@ -184,21 +176,59 @@
 		<div class="footercontent">
 			<div class="row-fluid">
 		   		<div class="span5" >
+		   			<div id="fb-root"></div>
+					<script>(function(d, s, id) {
+					  var js, fjs = d.getElementsByTagName(s)[0];
+					  if (d.getElementById(id)) return;
+					  js = d.createElement(s); js.id = id;
+					  js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=485688004787851";
+					  fjs.parentNode.insertBefore(js, fjs);
+					}(document, 'script', 'facebook-jssdk'));
+				    
+				    function postToFeed(url) {
+						// calling the API ...
+						var obj = {
+						  	method: 'feed',
+						  	redirect_uri: 'http://routemarks.com',
+						  	link: url,
+						  	picture: 'http://routemarks.com/assets/img/favicon.ico',
+						  	name: 'RouteMarks',
+						  	caption: 'Check out new mark created!',
+						  	description: ''
+						};
+						function callback(response) {
+							console.log("successfully shared.");
+						}		
+						FB.ui(obj, callback);
+				    }
+				    function popUpTwitter(url) {
+				    	var left = 500;
+				    	var top = 200;
+				    	newwindow=window.open(url,'name','height=250,width=350,top=200,left=350');
+				    	if (window.focus) {
+				    		newwindow.focus();
+				    	}
+				    	return false;
+				    }
+					</script>
 		   			<div class="fb-like" data-href="http://www.routemarks.com/" data-send="true" data-layout="button_count" data-width="450" data-show-faces="false"></div>
 		   		
-		   			<g:plusone></g:plusone>
+		   			<g:plusone size="medium" annotation="none"></g:plusone>
 			   		<script type="text/javascript">
 				      window.___gcfg = {
 				        lang: 'en-US'
-				      };
-				
+				      };				
 				      (function() {
 				        var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
 				        po.src = 'https://apis.google.com/js/plusone.js';
 				        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
 				      })();
 				    </script>
-				    <script type="text/javascript">
+					<a href="https://twitter.com/share" class="twitter-share-button" data-lang="en" data-count="none" data-url="http://routemarks.com">Tweet</a>
+					<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="https://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+					<script src="//platform.linkedin.com/in.js" type="text/javascript"> lang: en_US</script>
+					<script type="IN/Share"></script>					
+					<script type="text/javascript">					
 					  var _gaq = _gaq || [];
 					  _gaq.push(['_setAccount', 'UA-39564014-1']);
 					  _gaq.push(['_trackPageview']);
@@ -207,7 +237,8 @@
 					    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
 					    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
 					    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-					  })();					
+					  })();
+					
 					</script>
 		   		</div>
 		   		<div class="span3" style="text-align:center">

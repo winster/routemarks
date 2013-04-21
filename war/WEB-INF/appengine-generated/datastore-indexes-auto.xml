@@ -1,0 +1,20 @@
+<!-- Indices written at Sun, 21 Apr 2013 11:05:53 IST -->
+
+<datastore-indexes>
+
+    <!-- Used 8 times in query history -->
+    <datastore-index kind="Mark" ancestor="false" source="auto">
+        <property name="countryCode" direction="asc"/>
+        <property name="lastUpdatedTimeInMillis" direction="desc"/>
+    </datastore-index>
+
+    <!-- Used 1 time in query history -->
+    <datastore-index kind="Mark" ancestor="false" source="auto">
+        <property name="addressLevel1Code" direction="asc"/>
+        <property name="addressLevel2Code" direction="asc"/>
+        <property name="countryCode" direction="asc"/>
+        <property name="localityCode" direction="asc"/>
+        <property name="lastUpdatedTimeInMillis" direction="desc"/>
+    </datastore-index>
+
+</datastore-indexes>
