@@ -1,12 +1,12 @@
 $(document).ready(initialize);
 
 var layer, map, googlePosition, directionsService, infoboxsmall, infowindow, 
-		infoWindowContent = null, markers = [], marker = new google.maps.Marker({ map: map	});
+		infoWindowContent = null, markers = [], marker = new google.maps.Marker({ map: map	}), spotMarker;
 var SWLAT,SWLNG,NELAT,NELNG;
 
 /***********Search routes starts here**************/
 /**
- * 
+ * Invokes on document ready
  */
 function initialize() {
 	directionsService = new google.maps.DirectionsService();
@@ -19,6 +19,7 @@ function initialize() {
     map = new google.maps.Map($('#map_canvas')[0],mapOptions);
     directionsRenderer.setMap(map);
     infoboxsmall = getInfoBox($(".infobox")[0], 280, 0.75);
+    
     if(navigator.geolocation) {
     	getGeoLocation();
     } else {
@@ -48,13 +49,8 @@ function initialize() {
     });
     attachEventListeners();	
     loadMarkerInfoWindowContent();
-    
-    var params = getQueryParameters()
-    if(params) {
-    	showMarkOnMap(params);
-    }
-	
-    //loadUpdates(getDummyData());
+
+    loadUpdates(getDummyData());
 }
 
 /**
@@ -270,7 +266,8 @@ function showMarkOnMap(item){
 	map.setZoom(18);
 	getLocationfromGoogle(pos, function(geo_address){
 		var target = getLocationStringFromGeo(geo_address.address_components); 
-		var spotMarker = new google.maps.Marker({
+		if(spotMarker) spotMarker.setMap(null);
+		spotMarker = new google.maps.Marker({
     		position: pos,
     		map: map,
     		title: target
@@ -291,7 +288,7 @@ function showMarkOnMap(item){
     	query: {
         	select: ' Location ',
         	from: '19ZyjTyDCYccePHh_q-gYxP4oLfgS41lC_4oF1eA',
-        	where: "TSRId = '"+item["markId"]+"'"
+        	where: "TSRId='"+item["markId"]+"'"
         }
     });
     layer.setMap(map);
@@ -620,6 +617,8 @@ function geoCodeLocation(){
     		} else{
     			requestServerForToken(results[0].address_components);	
     		}
+    		//Show mark if query params present
+    		checkQueryParameters();
         } else {
         	console.log('Google convertion is not succesfully done.');  
         }
@@ -701,7 +700,7 @@ function onOpened(geo_address_components, message){
     });
 
 	$(".locationSelected").text(getCountryFromGeo(geo_address_components).long_name);
-	loadUpdates(message);
+	//loadUpdates(message);
 }
 
 /**
@@ -836,7 +835,7 @@ function attachMessageActionsListeners(communityUpdate, item){
 											function(){
 												showMarkOnMap(item);
 											});
-	var url = "http://routemarks.com?mark="+item["markId"]+"&loc="+item["location"];
+	var url = "http://routemarks.com/?mark="+item["markId"]+"&loc="+item["location"];
 	$(communityUpdate).find(".copyclipbtn").unbind('click');
 	$(communityUpdate).find(".copyclipbtn").click(function(){
 													copyToClipBoard(url);
@@ -846,9 +845,12 @@ function attachMessageActionsListeners(communityUpdate, item){
 													postToFeed(url);
 												});
 	$(communityUpdate).find(".tweet").unbind('click');
-	$(communityUpdate).find(".tweet").click(function(){
-											popUpTwitter("https://twitter.com/share");
-												});	
+	/*$(communityUpdate).find(".tweet").click(function(){
+													shortenUrl("https://twitter.com/share?url="+url,
+															function(shortUrl){
+																popUpTwitter(shortUrl);
+															});													
+												});	*/
 	var span =  $(communityUpdate).find(".NameHighlights")[0];
 	var t;
     span.onmouseover = function () {
@@ -1095,7 +1097,10 @@ function handleNoGeolocation(errorFlag) {
 	} else {
 		var content = 'Error: Your browser doesn\'t support geolocation.';
 	}
-	map.setCenter(new google.maps.LatLng(40.714353, -74.005973));
+	googlePosition = new google.maps.LatLng(40.714353, -74.005973);
+	map.setCenter(googlePosition);
+	//Show mark if query params present
+	checkQueryParameters();    
 }
 
 
@@ -1226,16 +1231,33 @@ function getQueryParam(name){
 }
 
 /**
- * 
+ * Check url for mark and location attributes, if present show mark on screen
  * @returns
  */
-function getQueryParameters(){
+function checkQueryParameters(){
 	var mark = getQueryParam("mark");
 	var loc = getQueryParam("loc");
 	if(mark && loc) {
-		return {markId:mark, location:loc};
-	} else  return null;
+		showMarkOnMap({markId:mark, location:loc});
+	}
 }
+
+/**
+ * 
+ * @param url
+ * @param callback
+
+function shortenUrl(url, callback) {
+$.ajax({
+		  type: "POST",
+		  url: "https://www.googleapis.com/urlshortener/v1/url",
+		  contentType:"application/json; charset=utf-8",
+		  data: JSON.stringify({longUrl:url}),
+		  success: function(res){
+			  callback(res["id"]);
+		  }
+		});
+}*/
 /***Common script ends here***/
 
 function getDummyData() {
