@@ -201,7 +201,7 @@
 						}		
 						FB.ui(obj, callback);
 				    }
-				    function popUpTwitter(url) {
+				    /*function popUpTwitter(url) {
 				    	var left = 500;
 				    	var top = 200;
 				    	newwindow=window.open(url,'name','height=250,width=350,top=200,left=350');
@@ -209,7 +209,7 @@
 				    		newwindow.focus();
 				    	}
 				    	return false;
-				    }
+				    }*/
 					</script>
 		   			<div class="fb-like" data-href="http://www.routemarks.com/" data-send="true" data-layout="button_count" data-width="450" data-show-faces="false"></div>
 		   		
