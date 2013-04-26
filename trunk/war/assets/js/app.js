@@ -50,7 +50,7 @@ function initialize() {
     attachEventListeners();	
     loadMarkerInfoWindowContent();
 
-    loadUpdates(getDummyData());
+    //loadUpdates(getDummyData());
 }
 
 /**
@@ -700,7 +700,7 @@ function onOpened(geo_address_components, message){
     });
 
 	$(".locationSelected").text(getCountryFromGeo(geo_address_components).long_name);
-	//loadUpdates(message);
+	loadUpdates(message);
 }
 
 /**
