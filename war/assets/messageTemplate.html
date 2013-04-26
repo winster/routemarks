@@ -1,19 +1,22 @@
 <div class="row-fluid show-grid communityrow">
-	<div class="span2 profile">
-		#{username}<br>(<span class="NameHighlights">
-    						<a>#{countrycode} &middot; #{locality}</a>
-						    <div class="copyclipContainer">
-						        <div class="btn-group">
-						        	<button class="btn btn-primary sharefb">share</button>
-						        	<button class="btn btn-primary copyclipbtn">copy to clipboard</button>						        	
-						        </div>
-						    </div>
-						</span>)
-	</div>
-	<div class="span10 updatedesc">
+	<div class="span12">
+		<span class="NameHighlights">
+						<a>#{countrycode} &middot; #{locality}</a>
+		    <div class="copyclipContainer">
+		        <div class="btn-group">
+		        	<button class="btn btn-primary sharefb">share</button>
+		        	<button class="btn btn-primary copyclipbtn">copy to clipboard</button>						        	
+		        </div>
+		    </div>
+		</span>
+		<span class="updatedesc">
 		#{category} &middot; #{transportation} &middot; #{nature} &middot; #{severity} &middot; #{description}
+		</span>
 	</div>
 	<div>
+		<div class="pull-left text-success profile">
+		#{username}
+		</div>
 		<div class="pull-right">
 			<button class="btn star"><span class="starcount">#{starCount}</span>&nbsp;<i class="icon-eye-open"></i></button>
 			<button class="btn like"><span class="likecount">#{likeCount}</span>&nbsp;<i class="icon-bell"></i></button>

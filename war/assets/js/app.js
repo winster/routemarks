@@ -1272,8 +1272,8 @@ $.ajax({
 /***Common script ends here***/
 
 function getDummyData() {
-	var data = {loadType:'reload',updates:[{markId:"eed0c3a7-0240-4e5a-aac0-069e8e7330a7", location:'8.488029604845561,76.94859087467194', starCount:"2",likeCount:"3",dislikeCount:"6",username:"Winster",countrycode:"IN",locality:"Kelakam",category:"Accident",transportation:"Car",nature:"Traffic rule violation",severity:"critical",description:"It was a mistake from truck driver that took lives of 3."},
-	  	               {markId:"84190cc9-af35-473f-b486-86d4e98ac212", location:'10.115253001463541,76.50215864181519', starCount:"2",likeCount:"3",dislikeCount:"6",username:"Jose",countrycode:"US",locality:"Columbia",category:"Disaster",transportation:"Public Transport",nature:"Wrong message board",severity:"major",description:"Correct the message board."}]};
+	var data = {loadType:'reload',updates:[{markId:"eed0c3a7-0240-4e5a-aac0-069e8e7330a7", location:'8.488029604845561,76.94859087467194', starCount:"2",likeCount:"3",dislikeCount:"6",username:"Winster",countrycode:"IN",locality:"Kelakam",category:"Accident",transportation:"Car",nature:"Traffic rule violation",severity:"critical",description:"It was a mistake from truck driver that took lives of 3.",date:"Apr 26, 2013 2:54:31 PM"},
+	  	               {markId:"84190cc9-af35-473f-b486-86d4e98ac212", location:'10.115253001463541,76.50215864181519', starCount:"2",likeCount:"3",dislikeCount:"6",username:"Jose",countrycode:"US",locality:"Columbia",category:"Disaster",transportation:"Public Transport",nature:"Wrong message board",severity:"major",description:"Correct the message board.",date:"Apr 26, 2013 1:54:31 PM"}]};
 	//var message = {data:data};
 	return data;
 }
