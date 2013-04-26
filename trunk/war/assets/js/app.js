@@ -842,8 +842,8 @@ function attachMessageActionsListeners(communityUpdate, item){
 	$(communityUpdate).find(".like").click(likeMark);
 	$(communityUpdate).find(".dislike").unbind('click');
 	$(communityUpdate).find(".dislike").click(dislikeMark);
-	$(communityUpdate).find(".profile a").unbind('click');
-	$(communityUpdate).find(".profile a").click(
+	$(communityUpdate).find(".NameHighlights a").unbind('click');
+	$(communityUpdate).find(".NameHighlights a").click(
 											function(){
 												showMarkOnMap(item);
 											});
