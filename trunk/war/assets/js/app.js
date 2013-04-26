@@ -949,7 +949,6 @@ function createAnonymous(address_components){
 		  type:"POST",
 		  data:JSON.stringify(address_components),
 		  contentType:"application/json; charset=utf-8",
-		  dataType:"json",
 		  success: function(data, textStatus, request){
 			  console.log("successful");
 		  },
