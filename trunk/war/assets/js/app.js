@@ -613,7 +613,9 @@ function geoCodeLocation(){
 				    			createAnonymous(results[0].address_components).done(function(){
 				    				requestServerForToken(results[0].address_components);
 				    			}
-				    		);	
+				    		).fail(function(){
+								showCommunityFailedMessage();
+				    		});	
     		} else{
     			requestServerForToken(results[0].address_components);	
     		}
@@ -667,16 +669,26 @@ function requestServerForToken(geo_address_components){
 			  socket.onclose = onClose;
 		  },
 		  error : function(){ 
-			  /*clear progress flag*/
-			  clearInterval(progress);
-		      $('.progress').removeClass('active');
-		      $('.progress').hide();
-		      /* progress bar*/
-			  $('.alert').show();
-			  deleteAllCookies();
+			  showCommunityFailedMessage(progress);			  
 		  } 
 		});
 }
+
+/**
+ * 
+ */
+function showCommunityFailedMessage(progress){
+	/*clear progress flag*/
+	if(progress) {
+		clearInterval(progress);
+	    $('.progress').removeClass('active');
+	    $('.progress').hide();
+	}
+    /* progress bar*/
+	$('.alert').show();
+	deleteAllCookies();
+}
+
 /**
  * 
  * @param geo_address_components
