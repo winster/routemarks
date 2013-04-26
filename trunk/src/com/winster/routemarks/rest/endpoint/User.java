@@ -76,6 +76,7 @@ public class User extends HttpServlet{
 			GeocodeAddressComponents[] addressComponents = LocationHelper.retriveGeoAddressFromRequest(req);
 			AccountHelper.createAnonymousUser(req, resp, addressComponents);
 			resp.getWriter().write("Anonymous user created successfully."); 
+			resp.setStatus(HttpServletResponse.SC_OK);
 		}
 	}
 	
