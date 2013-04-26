@@ -950,12 +950,12 @@ function createAnonymous(address_components){
 		  data:JSON.stringify(address_components),
 		  contentType:"application/json; charset=utf-8",
 		  dataType:"json",
-		  success: function(msg){
+		  success: function(data, textStatus, request){
 			  console.log("successful");
 		  },
-		  error : function(msg){ 
-			  console.log('error while sending request!'+msg);
-		  } 
+		  error: function (request, textStatus, errorThrown) {
+			  console.log('error while sending request!'+errorThrown);
+		  }
 		});
 }
 
