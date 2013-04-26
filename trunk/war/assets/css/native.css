@@ -223,6 +223,8 @@ body {
 .profile{
 	color:blue;
 	cursor: default;
+	padding-top: 10px;
+   	padding-right: 10px;
 }
 .markdate{
 	text-align: center;
