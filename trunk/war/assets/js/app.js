@@ -610,7 +610,7 @@ function geoCodeLocation(){
         	//console.log(results[0].formatted_address);
     		//Create anonymous user as a post loading process
     		if(getCookie("firstvisit")==="true") {
-				    			createAnonymous(results[0].address_components).always(function(){
+				    			createAnonymous(results[0].address_components).done(function(){
 				    				requestServerForToken(results[0].address_components);
 				    			}
 				    		);	
