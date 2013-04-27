@@ -377,11 +377,14 @@ function attachListenerToMarker(marker) {
  * @param clonedObj
  */
 function attachListenerToInfobox(marker, clonedObj){
-	$(clonedObj).find(".nextdiv").bind( "click", function(event) {
-    	navigateToSubmit(event);
+	$(clonedObj).find(".filterdiv").bind( "click", function(event) {
+    	navigateToFilter(event);
 	});
-	$(clonedObj).find(".prevdiv").bind( "click", function(event) {
-    	navigateToData(event);
+	$(clonedObj).find(".imagediv").bind( "click", function(event) {
+    	navigateToImage(event);
+	});
+	$(clonedObj).find(".submitdiv").bind( "click", function(event) {
+    	navigateToSubmit(event);
 	});
 	$(clonedObj).find(".category").bind( "change", function(event) {
     	selectNatureElements(event);
@@ -413,10 +416,12 @@ function insertMark(event, marker, address_components){
 		reason = $(event.target).parent().parent().find(".reason_calamity").val();
 	}
 	var description = $(event.target).parent().parent().find(".news").val();
-	var data = {"location":location,
-				"category":category,"transportation":transportation,
+	var embed = $(event.target).parent().parent().find(".embed").val();
+	var data = {"location":location,"category":category,
+				"transportation":transportation,
 				"reason":reason,"severity":severity,
-				"description":description, "address":address_components};
+				"description":description, "embed":embed, 
+				"address":address_components};
 
 	$.post("markfn/insert",JSON.stringify(data))
 		.success(function(msg) {
@@ -447,47 +452,74 @@ function navigateToSubmit(event) {
 	var parent = $(event.target).parent().parent().parent().parent();
 	$(parent).find(".captchaInput").val('');
 	reloadCaptchaDiv(parent);
-    $(event.target).parent().parent().parent().parent().children('.current').removeClass('current').hide()
-        .next().show().addClass('current');    
+    parent.children().find('.current').removeClass('current').hide();
+    parent.children().find('.data-submit').show().addClass('current');    
 }
 
 /**
  * 
  * @param event
  */
-function navigateToData(event) {
-	$(event.target).parent().parent().children('.current').removeClass('current').hide()
-     				.prev().show().addClass('current');
-    if(!isOptionValid(event.target, ".category")){
-    	$(event.target).parent().parent().find(".category").addClass("mandatoryfield");
-	} else {
-		$(event.target).parent().parent().find(".category").removeClass("mandatoryfield");
+function navigateToImage(event) {
+	var parent = $(event.target).parent().parent().parent().parent();
+	var current = $(parent).children().find('.current');
+	if(current.length===0){
+		current = $(parent).children('.current');
 	}
-    if($(event.target).parent().parent().find(".transportation_types").is(":visible")){
+	current.removeClass('current').hide();
+	var image = $(parent).children().find('.data-image');
+	if(image.length===0) {
+		image = $(parent).children('.data-image');
+	}
+	image.show().addClass('current');    
+}
+
+/**
+ * 
+ * @param event
+ */
+function navigateToFilter(event) {
+	var parent = $(event.target).parent().parent();
+	var current = parent.children().find('.current');
+	if(current.length===0){
+		current = parent.children('.current');
+	}
+	current.removeClass('current').hide();
+	var filter = parent.children().find('.data-entry');
+	if(filter.length===0){
+		filter = parent.children('.data-entry');
+	}
+	filter.show().addClass('current');
+    if(!isOptionValid(event.target, ".category")){
+    	parent.find(".category").addClass("mandatoryfield");
+	} else {
+		parent.find(".category").removeClass("mandatoryfield");
+	}
+    if(parent.find(".transportation_types").is(":visible")){
 	    if(!isOptionValid(event.target, ".transportation_types")){
-	    	$(event.target).parent().parent().find(".transportation_types").addClass("mandatoryfield");
+	    	parent.find(".transportation_types").addClass("mandatoryfield");
 		} else {
-			$(event.target).parent().parent().find(".transportation_types").removeClass("mandatoryfield");
+			parent.find(".transportation_types").removeClass("mandatoryfield");
 		}
 	}
-    if($(event.target).parent().parent().find(".reason_accident").is(":visible")){
+    if(parent.find(".reason_accident").is(":visible")){
 	    if(!isOptionValid(event.target, ".reason_accident")){
-	    	$(event.target).parent().parent().find(".reason_accident").addClass("mandatoryfield");
+	    	parent.find(".reason_accident").addClass("mandatoryfield");
 		} else {
-			$(event.target).parent().parent().find(".reason_accident").removeClass("mandatoryfield");
+			parent.find(".reason_accident").removeClass("mandatoryfield");
 		}
     }
-    if($(event.target).parent().parent().find(".reason_calamity").is(":visible")){
+    if(parent.find(".reason_calamity").is(":visible")){
 	    if(!isOptionValid(event.target, ".reason_calamity")){
-	    	$(event.target).parent().parent().find(".reason_calamity").addClass("mandatoryfield");
+	    	parent.find(".reason_calamity").addClass("mandatoryfield");
 		} else {
-			$(event.target).parent().parent().find(".reason_calamity").removeClass("mandatoryfield");
+			parent.find(".reason_calamity").removeClass("mandatoryfield");
 		}
     }
     if(!isOptionValid(event.target, ".severity")){
-    	$(event.target).parent().parent().find(".severity").addClass("mandatoryfield");
+    	parent.find(".severity").addClass("mandatoryfield");
 	} else {
-		$(event.target).parent().parent().find(".severity").removeClass("mandatoryfield");
+		parent.find(".severity").removeClass("mandatoryfield");
 	}
 }
 
@@ -503,7 +535,7 @@ function validate(event){
 						$(event.target).parent().parent().find(".transportation_types").is(":hidden"))
 				&& (isOptionValid(event.target, ".reason_accident") ||  
 						isOptionValid(event.target, ".reason_calamity")) 
-				&& $(event.target).parent().parent().find(".severity").val().trim().length!==0){
+				&& $(event.target).parent().parent().find(".severity").val() && $(event.target).parent().parent().find(".severity").val().trim().length!==0){
 			$('.mini-layout').fadeTo('slow',.3);
 			$('.mini-layout').addClass("disabledDiv");
 			$('.markmessage').removeClass('text-error');
@@ -512,7 +544,7 @@ function validate(event){
 			$('.markmessage').text('Saving your data...');
 			return true;
 		} else {
-			navigateToData(event);			
+			navigateToFilter(event);			
 		}
 	}
 	return false;
@@ -634,18 +666,18 @@ function geoCodeLocation(){
 function requestServerForToken(geo_address_components){
 	$('.progress').show();
 	var maxWidth = $('.progress').width();
-	var factor = maxWidth/10;
+	var width = 1;
 	var progress = setInterval(function() {
 	    var $bar = $('.bar');
-	    if ($bar.width()>=maxWidth) {
+	    if (width>100) {
 	        clearInterval(progress);
 	        $('.progress').removeClass('active');
-	        $('.progress').hide();
 	    } else {
-	        $bar.width($bar.width()+factor);
-	    }
-	    $bar.text(parseInt($bar.width()/(factor*.1)) +10+ "%");
-	}, 800);
+	        $bar.width(width+"%");
+	        $bar.text(width+"%");
+	        width++;
+	    }	    
+	}, 100);
 	
 	$.ajax({
 		  url:"communitytoken/list",
@@ -654,6 +686,8 @@ function requestServerForToken(geo_address_components){
 		  contentType:"application/json; charset=utf-8",
 		  dataType:"json",
 		  success: function(msg){
+			  clearInterval(progress);
+			  $('.progress').hide();
 			  channel = new goog.appengine.Channel(msg.token);
 			  socket = channel.open();
 			  socket.onopen = function(){
@@ -669,6 +703,8 @@ function requestServerForToken(geo_address_components){
 			  socket.onclose = onClose;
 		  },
 		  error : function(){ 
+			  clearInterval(progress);
+			  $('.progress').hide();
 			  showCommunityFailedMessage(progress);			  
 		  } 
 		});
@@ -813,6 +849,9 @@ function fillUpdates(data) {
 		$(".morerow button").hide();
 	}
 	$.each(data.updates, function(index, item) {
+		if(!item["locality"]) {
+			item["locality"] = "";
+		}
 		var communityUpdate = communityRowTemplate.fill(item);
 		attachMessageActionsListeners(communityUpdate, item);
 		if(data.loadType==='prepend') {
@@ -843,10 +882,9 @@ function attachMessageActionsListeners(communityUpdate, item){
 	$(communityUpdate).find(".dislike").unbind('click');
 	$(communityUpdate).find(".dislike").click(dislikeMark);
 	$(communityUpdate).find(".NameHighlights a").unbind('click');
-	$(communityUpdate).find(".NameHighlights a").click(
-											function(){
-												showMarkOnMap(item);
-											});
+	$(communityUpdate).find(".NameHighlights a").click(function(){
+													showMarkOnMap(item);
+												});
 	var url = "http://routemarks.com/?mark="+item["markId"]+"&loc="+item["location"];
 	$(communityUpdate).find(".copyclipbtn").unbind('click');
 	$(communityUpdate).find(".copyclipbtn").click(function(){
@@ -856,8 +894,12 @@ function attachMessageActionsListeners(communityUpdate, item){
 	$(communityUpdate).find(".sharefb").click(function(){
 													postToFeed(url);
 												});
-	$(communityUpdate).find(".tweet").unbind('click');
-	/*$(communityUpdate).find(".tweet").click(function(){
+	$(communityUpdate).find(".photo").unbind('click');
+	$(communityUpdate).find(".photo").click(function(){
+													showPicture(item);
+												});
+	/*$(communityUpdate).find(".tweet").unbind('click');
+	$(communityUpdate).find(".tweet").click(function(){
 													shortenUrl("https://twitter.com/share?url="+url,
 															function(shortUrl){
 																popUpTwitter(shortUrl);
@@ -886,6 +928,25 @@ function hideAll() {
     for (var i = span.length; i--;) {
         span[i].className = 'NameHighlights'; 
     }
+}
+
+/**
+ * Show picture modal when clicked on camera link
+ */
+function showPicture(item){
+	var videoUrl = item["videoUrl"];
+	var picUrl = item["imageUrl"];
+	if(!videoUrl){
+		videoUrl = "No video available";
+	}
+	if(!picUrl){
+		picUrl = "No image available";
+	} else {
+		picUrl = "<img src=\""+picUrl+"\">";
+	}
+	$('#picModal #video').html(videoUrl);
+	$('#picModal #pic').html(picUrl);
+	$('#picModal').modal('show');
 }
 
 /**

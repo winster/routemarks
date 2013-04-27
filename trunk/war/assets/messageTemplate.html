@@ -9,22 +9,28 @@
 		        </div>
 		    </div>
 		</span>
-		<span class="updatedesc">
+		<span class="messageDesc">
 		#{category} &middot; #{transportation} &middot; #{nature} &middot; #{severity} &middot; #{description}
 		</span>
 	</div>
-	<div>
-		<div class="pull-left text-success profile">
+	<div class="span12 profiledatebtn">
+		<div class="text-success profile span2">
 		#{username}
 		</div>
-		<div class="pull-right">
-			<button class="btn star"><span class="starcount">#{starCount}</span>&nbsp;<i class="icon-eye-open"></i></button>
-			<button class="btn like"><span class="likecount">#{likeCount}</span>&nbsp;<i class="icon-bell"></i></button>
-			<button class="btn dislike"><span class="dislikecount">#{dislikeCount}</span>&nbsp;<i class="icon-trash"></i></button>		
+		<div class="span1 photo">
+			<i class="icon-camera"></i>
 		</div>
-		<div class="pull-right text-warning markdate">
+		<div class="text-warning markdate span5">
 			#{date}
 		</div>		
+		<div class="span4">
+			<div class="btn-group">
+				<button class="btn star"><span class="starcount">#{starCount}</span>&nbsp;<i class="icon-eye-open"></i></button>
+				<button class="btn like"><span class="likecount">#{likeCount}</span>&nbsp;<i class="icon-bell"></i></button>
+				<button class="btn dislike"><span class="dislikecount">#{dislikeCount}</span>&nbsp;<i class="icon-trash"></i></button>
+			</div>		
+		</div>
+				
 	</div>	
 	<span class="hidden markId" id="#{markId}">#{markId}</span>
 </div>

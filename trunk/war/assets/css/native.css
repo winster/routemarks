@@ -135,7 +135,7 @@ body {
 	background-color: #F89406 !important;
 	color: white !important;
 }
-.data-submit{
+.data-submit, .data-image{
 	display: none;
 }
 .infobox-wrapper {
@@ -160,6 +160,9 @@ body {
 .markinfowindow{
 	border:2px solid silver;	
 	background:lightyellow;
+}
+.markinfowindow h6{
+	border-bottom: 1px solid #329dc8;
 }
 #routes{
 	height: 80%;
@@ -231,12 +234,16 @@ body {
    	padding-top: 10px;
    	padding-right: 10px;
 }
-/*
-.manage-social {
-	min-height: 450px;
-}*/
-.updatedesc {
-	overflow: hidden;
+.communityrow .messageDesc{
+	word-wrap: break-word;
+}
+.communityrow .profiledatebtn{
+	margin-left: 0;
+}
+
+.photo{
+	padding-top:10px;
+	cursor: pointer;	
 }
 .masthead{
 	background: url("../img/bg1.png") repeat;
@@ -287,6 +294,10 @@ body {
 	margin-bottom: 30px; 
 	margin-top: 10px;
 }
+.picsection{
+	text-align: center;
+}
+
 .footerlinks a{
 	margin-right: 5px;
 	color: white;

@@ -285,84 +285,7 @@
 	  <div class="modal-footer">
 	    <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
 	  </div>
-	</div>
-	
-	<div class="markinfowindowcontainer hide">
-	    <div class="markinfowindow infobox">
-	        <div class="data-entry current">
-				<div class="row-fluid show-grid">
-					<div class="span11">
-						<select class="selectbox span6 category" autofocus="autofocus">
-							<option value="" disabled="disabled" selected="selected" style="display:none">Select Category</option>
-							<option value="Accident">Accident</option>
-							<option value="Natural Disaster">Natural Disaster</option>
-						</select>
-						<select class="selectbox span6 transportation_types">
-							<option value="" disabled="disabled" selected="selected" style="display:none">Select Transport Mode</option>
-							<option value="Bicycle">BiCycle</option>
-							<option value="Car">Car</option>
-							<option value="Motor Cycle">Motor Cycle</option>
-							<option value="Public Transport">Public Transport</option>
-							<option value="SUV">SUV</option>
-							<option value="Truck">Truck</option>
-							<option value="Train">Train</option>						
-						</select>
-						<select class="selectbox hide span6 transportation_na">
-							<option value="" disabled="disabled" selected="selected" style="display:none">Not Applicable</option>
-						</select>
-					</div>	
-				</div>
-				<div class="row-fluid show-grid">
-					<div class="span11">
-						<textarea class="news span8" rows="2" placeholder="Enter a small description of the accident" maxlength="65"></textarea>
-						<button type="button" class="btn btn-primary nextdiv">Submit <i class="icon-forward"></i></button>
-					</div>
-				</div>
-				<div class="row-fluid show-grid">
-					<div class="span11">
-						<select class="selectbox span6 reason_accident">
-							<option value="" disabled="disabled" selected="selected" style="display:none">Select Reason</option>
-							<option value="Over speed">Over speed</option>
-							<option value="Reckless driving">Reckless driving</option>
-							<option value="Sharp Curve">Sharp Curve</option>
-							<option value="Traffic rule violation">Traffic rule violation</option>
-							<option value="Wrong message board">Wrong message board</option>
-							<option value="Ice road">Ice road</option>
-							<option value="Other">Other</option>
-						</select>
-						<select class="selectbox hide span6 reason_calamity">
-							<option value="" disabled="disabled" selected="selected" style="display:none">Select Nature</option>
-							<option value="Avalanches and Landslides">Avalanche and Landslides</option>
-							<option value="Earthquake">Earthquake</option>
-							<option value="Hurricanes or Typhoons">Hurricane or Typhoon</option>
-							<option value="Tornadoes">Tornado</option>
-							<option value="Tsunamis">Tsunami</option>
-							<option value="Volcanic Eruptions">Volcanic Eruptions</option>
-							<option value="Other">Other</option>
-						</select>
-						<select class="selectbox span6 severity">
-							<option value="" disabled="disabled" selected="selected" style="display:none">Select Severity</option>
-							<option value="Critical">Critical</option>
-							<option value="Major">Major</option>
-							<option value="Minor">Minor</option>
-						</select>
-					</div>	
-				</div>
-			</div>
-			<div class="data-submit">
-				<button type="button" class="btn btn-small btn-info prevdiv pull-left"> <i class="icon-backward"></i> Back</button>
-				<div class="row show-grid">
-					<div class="span4 text-error">Please read policies before you submit. Please refrain<br> from submitting this mark, if you are unsure about the incident.</div>
-				</div>	
-				<div class="input-prepend pagination-centered">
-					<span class="add-on captchalabel"></span>
-					<input class="input-medium captchaInput" type="text" placeholder="Are you human?">
-				</div>				
-				<button type="button" class="btn btn-block btn-success submitmarker">Submit</button>				
-			</div>
-	    </div>
-    </div>
-	
+	</div>	
 	<div id="reportModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="reportLabel" aria-hidden="true">
 		<div class="modal-header">
 			<button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button>
@@ -439,8 +362,7 @@
 		 <div class="modal-footer">
 		   	<button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
 		 </div>	
-	</div>
-		
+	</div>		
 	<div id="accountModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="accountLabel" aria-hidden="true">
 		<div class="modal-header">
 			<button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button>
@@ -508,6 +430,23 @@
 					</div>
 		          </div>
 			</section>
+		 </div>
+		 <div class="modal-footer">
+		   	<button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+		 </div>	
+	</div>	
+	<div id="picModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="picLabel" aria-hidden="true">
+		<div class="modal-body">
+			<section class="picsection">
+				<ul class="nav nav-tabs">
+					<li class="active"><a href="#pic" data-toggle="tab">Image</a></li>
+					<li><a href="#video" data-toggle="tab">Video</a></li>					
+				</ul>
+				<div id="myTabContent" class="tab-content">
+	            	<div class="tab-pane fade" id="video"></div>
+	              	<div class="tab-pane fade active in" id="pic"></div>              
+	            </div>			   	
+		   	</section>
 		 </div>
 		 <div class="modal-footer">
 		   	<button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
