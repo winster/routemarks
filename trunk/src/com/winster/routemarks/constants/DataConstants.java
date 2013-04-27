@@ -8,7 +8,7 @@ public enum DataConstants {
 	MARKER_COLUMN_USERNAME("UserName"),	
 	MARKER_COLUMN_GROUPID("GroupId"),
 	MARKER_COLUMN_LOCATION("Location"),
-	MARKER_COLUMN_DATE("LastUpdatedDate"),
+	MARKER_COLUMN_DATE("Date"),
 	MARKER_COLUMN_VIDEO("Video"),
 	MARKER_COLUMN_IMAGE("Image"),
 	MARKER_COLUMN_CATEGORY("Category"),
