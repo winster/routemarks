@@ -150,7 +150,7 @@ function calcRoute(date, spot) {
                 	select: ' Location ',
                 	from: '19ZyjTyDCYccePHh_q-gYxP4oLfgS41lC_4oF1eA',
                 	//from: '133ytL1x27ziKjcAPei7KURC866U9LdK6wipRtFU',
-                	where: "ST_INTERSECTS(Location, RECTANGLE(LATLNG("+SWLAT+", "+SWLNG+"), LATLNG("+NELAT+", "+NELNG+"))) and LastUpdatedDate >= '"+date+"' "
+                	where: "ST_INTERSECTS(Location, RECTANGLE(LATLNG("+SWLAT+", "+SWLNG+"), LATLNG("+NELAT+", "+NELNG+"))) and Date >= '"+date+"' "
                 }
             });
             layer.setMap(map);
