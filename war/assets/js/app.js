@@ -1063,7 +1063,7 @@ function gup( name ){
 }
 
 /**
- * 
+ * Fetch data from fusion table
  */
 function getData(table, type) {
     // Builds a Fusion Tables SQL query and hands the result to dataHandler()
@@ -1074,17 +1074,17 @@ function getData(table, type) {
     // write your SQL as normal, then encode it
     var query = "SELECT TSRId FROM " + table + " WHERE ST_INTERSECTS(Location, RECTANGLE(LATLNG("+SWLAT+", "+SWLNG+"), LATLNG("+NELAT+", "+NELNG+"))) ";
     if(type==="all") {
-    	query += "AND LastUpdatedDate >= '01/01/2013'" 
+    	query += "AND Date >= '01/01/2013'" 
     } else if(type==="today") {
-    	query += "AND LastUpdatedDate >= '"+getDate(0)+"'" 
+    	query += "AND Date >= '"+getDate(0)+"'" 
     } else if(type==="yesterday") {
-    	query += "AND LastUpdatedDate >= '"+getDate(-1)+"'" 
+    	query += "AND Date >= '"+getDate(-1)+"'" 
     } else if(type==="lastweek") {
-    	query += "AND LastUpdatedDate >= '"+getDate(-7)+"'" 
+    	query += "AND Date >= '"+getDate(-7)+"'" 
     } else if(type==="lastmonth") {
-    	query += "AND LastUpdatedDate >= '"+getDate(-30)+"'" 
+    	query += "AND Date >= '"+getDate(-30)+"'" 
     } else if(type==="lastyear") {
-    	query += "AND LastUpdatedDate >= '"+getDate(-365)+"'" 
+    	query += "AND Date >= '"+getDate(-365)+"'" 
     }
     var queryurl = encodeURI(queryUrlHead + query + queryUrlTail);
 
@@ -1093,6 +1093,11 @@ function getData(table, type) {
     }, "jsonp");
 }
 
+/**
+ * 
+ * @param data
+ * @param type
+ */
 function populateResult(data, type) {
 	$("#"+type).text(data.table.rows.length);
 	if(type==='all'){
