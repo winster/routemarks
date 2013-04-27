@@ -70,9 +70,9 @@ public class MarkHelper {
 							DataConstants.MARKER_COLUMN_VIDEO.getValue()+"','"+DataConstants.MARKER_COLUMN_IMAGE.getValue()+"','"+
 							DataConstants.MARKER_COLUMN_SEVERITY.getValue()+"') " +
 							"VALUES ('"+markData.getMarkId()+"','"+markData.getId()+"','"+markData.getGroupId()+"','"+markData.getLocation()+"','"+
-							dateStr +"','"+markData.getCategory()+"','"+markData.getTransportation()+"','"+
+							dateStr +"','"+markData.getCategory()+"','"+markData.getTransportation()+"','"+markData.getReason()+"','"+
 							markData.getVideoUrl()+"','"+markData.getImageUrl()+"','"+ 
-							markData.getReason()+"','"+markData.getSeverity()+"')");
+							markData.getSeverity()+"')");
 			/*Sqlresponse response = */ sql.execute();
 			
 		} catch (Exception e) {	      
