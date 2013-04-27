@@ -947,6 +947,9 @@ function showPicture(item){
 	$('#picModal #video').html(videoUrl);
 	$('#picModal #pic').html(picUrl);
 	$('#picModal').modal('show');
+	$('#picModal').on('hidden', function () {
+		$("#video iframe").attr("src", "about:blank");
+	})
 }
 
 /**
