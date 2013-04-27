@@ -11,6 +11,7 @@ import com.winster.routemarks.constants.NumeralConstants;
 import com.winster.routemarks.data.entity.Mark;
 import com.winster.routemarks.data.fusion.FusionTableFactory;
 import com.winster.routemarks.data.txn.Transact;
+import com.winster.routemarks.util.Converter;
 import com.winster.routemarks.util.GoogleUtil;
 
 import java.text.DateFormat;
@@ -66,9 +67,11 @@ public class MarkHelper {
 							DataConstants.MARKER_COLUMN_GROUPID.getValue()+"','"+DataConstants.MARKER_COLUMN_LOCATION.getValue()+"','"+
 							DataConstants.MARKER_COLUMN_DATE.getValue()+"','"+DataConstants.MARKER_COLUMN_CATEGORY.getValue()+"','"+
 							DataConstants.MARKER_COLUMN_TRANSPORTATION.getValue()+"','"+DataConstants.MARKER_COLUMN_REASON.getValue()+"','"+
+							DataConstants.MARKER_COLUMN_VIDEO.getValue()+"','"+DataConstants.MARKER_COLUMN_IMAGE.getValue()+"','"+
 							DataConstants.MARKER_COLUMN_SEVERITY.getValue()+"') " +
 							"VALUES ('"+markData.getMarkId()+"','"+markData.getId()+"','"+markData.getGroupId()+"','"+markData.getLocation()+"','"+
-							dateStr +"','"+markData.getCategory()+"','"+markData.getTransportation()+"','"+ 
+							dateStr +"','"+markData.getCategory()+"','"+markData.getTransportation()+"','"+
+							markData.getVideoUrl()+"','"+markData.getImageUrl()+"','"+ 
 							markData.getReason()+"','"+markData.getSeverity()+"')");
 			/*Sqlresponse response = */ sql.execute();
 			
@@ -176,7 +179,7 @@ public class MarkHelper {
 		
 		if(resultSet!=null) {
 			for(Mark mark : resultSet) {
-				TSRMessage message = getTSRMEssageFromMark(mark);
+				TSRMessage message = Converter.convertMarkToMessage(mark);
 				messageList.add(message);
 			}
 		}
@@ -203,6 +206,8 @@ public class MarkHelper {
 		mark.setReason(markData.getReason());
 		mark.setSeverity(markData.getSeverity());
 		mark.setDescription(markData.getDescription());
+		mark.setVideoUrl(markData.getVideoUrl());
+		mark.setImageUrl(markData.getImageUrl());
 		
 		mark.setCountryCode(GoogleUtil.INSTANCE.getAddress(markData.getAddress(),GeoAddressConstants.COUNTRYCODE));
 		mark.setCountry(GoogleUtil.INSTANCE.getAddress(markData.getAddress(),GeoAddressConstants.COUNTRY));
@@ -222,32 +227,6 @@ public class MarkHelper {
 		return mark;
 	}
 	
-	/**
-	 * Create a TSRMessage from a mark object
-	 * @param mark
-	 * @return
-	 */
-	private static TSRMessage getTSRMEssageFromMark(Mark mark) {
-		TSRMessage message = new TSRMessage();
-		
-		message.setMarkId(mark.getMarkId());
-		message.setUsername(mark.getUserName());
-		message.setDate(mark.getLastUpdatedTime());
-		message.setCategory(mark.getCategory());
-		message.setTransportation(mark.getTransportation());
-		message.setNature(mark.getReason());
-		message.setSeverity(mark.getSeverity());
-		message.setDescription(mark.getDescription());
-		message.setCountrycode(mark.getCountryCode());
-		message.setLocality(mark.getLocality());
-		message.setLocation(mark.getLocation());
-		message.setLikeCount(mark.getLikeCount());
-		message.setStarCount(mark.getStarCount());
-		message.setDislikeCount(mark.getDislikeCount());
-		
-		return message;		
-	}
-
 	/**
 	 * Inserts a mark into fusion table
 	 * @param tableId

@@ -1,14 +1,16 @@
 <div class="markinfowindow">
 	<div class="data-entry current">
+		<button type="button" class="btn btn-small btn-info imagediv pull-right"> <i class="icon-forward"></i> Next</button>
+		<div class="row-fluid text-center"><h6>Choose parameters</h6></div>
 		<div class="row-fluid">
 			<div class="span12">
 				<select class="selectbox span6 category" autofocus="autofocus">
-					<option value=" " disabled="disabled" selected="selected" style="display:none">Choose Category</option>
+					<option value=" " disabled="disabled" selected="selected" style="display:none">Category</option>
 					<option value="Accident">Accident</option>
 					<option value="Natural Disaster">Natural Disaster</option>
 				</select>
 				<select class="selectbox span6 transportation_types">
-					<option value=" " disabled="disabled" selected="selected" style="display:none">Select Transport Mode</option>
+					<option value=" " disabled="disabled" selected="selected" style="display:none">Transport Mode</option>
 					<option value="Bicycle">BiCycle</option>
 					<option value="Car">Car</option>
 					<option value="Motor Cycle">Motor Cycle</option>
@@ -23,15 +25,14 @@
 			</div>	
 		</div>
 		<div class="row-fluid">
-			<div class="span12">
-				<textarea class="news span6" rows="2" placeholder="Enter a small description of the accident" maxlength="65"></textarea>
-				<button type="button" class="btn btn-primary nextdiv">Submit <i class="icon-forward"></i></button>
+			<div class="span12 text-center">
+				<textarea class="news input-large" rows="2" placeholder="Enter a small description of the accident" maxlength="60"></textarea>				
 			</div>
 		</div>
 		<div class="row-fluid">
 			<div class="span12">
 				<select class="selectbox span6 reason_accident">
-					<option value=" " disabled="disabled" selected="selected" style="display:none">Select Reason</option>
+					<option value=" " disabled="disabled" selected="selected" style="display:none">Root cause</option>
 					<option value="Over speed">Over speed</option>
 					<option value="Reckless driving">Reckless driving</option>
 					<option value="Sharp Curve">Sharp Curve</option>
@@ -41,7 +42,7 @@
 					<option value="Other">Other</option>
 				</select>
 				<select class="selectbox hide span6 reason_calamity">
-					<option value=" " disabled="disabled" selected="selected" style="display:none">Select Nature</option>
+					<option value=" " disabled="disabled" selected="selected" style="display:none">Nature</option>
 					<option value="Avalanches and Landslides">Avalanche and Landslides</option>
 					<option value="Earthquake">Earthquake</option>
 					<option value="Hurricanes or Typhoons">Hurricane or Typhoon</option>
@@ -51,7 +52,7 @@
 					<option value="Other">Other</option>
 				</select>
 				<select class="selectbox span6 severity">
-					<option value=" " disabled="disabled" selected="selected" style="display:none">Select Severity</option>
+					<option value=" " disabled="disabled" selected="selected" style="display:none">Severity</option>
 					<option value="Critical">Critical</option>
 					<option value="Major">Major</option>
 					<option value="Minor">Minor</option>
@@ -59,8 +60,26 @@
 			</div>	
 		</div>
 	</div>
+	
+	<div class="data-image">
+		<button type="button" class="btn btn-small btn-info filterdiv pull-left"> <i class="icon-backward"></i> Back</button>
+		<button type="button" class="btn btn-small btn-info submitdiv pull-right"> <i class="icon-forward"></i> Next</button>
+		<div class="row-fluid text-center"><h6>Upload visuals</h6></div>
+		<div class="row-fluid text-center">
+			<abbr title="Example : <iframe width='560' height='315' src='http://www.youtube.com/embed/8kR0CMG4OWk' frameborder='0' allowfullscreen></iframe>">YouTube / </abbr>
+			<abbr title="Example : <iframe src='http://player.vimeo.com/video/12678707?portrait=0' width='500' height='281' frameborder='0' webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>">Vimeo / </abbr>
+			<abbr title="Example : https://storage.cloud.google.com/routemarks/accident.jpg">Image</abbr>
+		</div>
+		<div class="row-fluid text-center">
+			<textarea class="embed input-large" rows="2" placeholder="embed youtube video or vimeo video. You can also give any image url."></textarea>
+		</div>
+		<div class="row-fluid text-center"><h5>Or upload image from system</h5></div>
+		<div class="row-fluid text-center"><input type="file"></div>
+	</div>
+	
 	<div class="data-submit">
-		<button type="button" class="btn btn-small btn-info prevdiv pull-left"> <i class="icon-backward"></i> Back</button>
+		<button type="button" class="btn btn-small btn-info imagediv pull-left"> <i class="icon-backward"></i> Back</button>
+		<div class="row-fluid text-center"><h6>Review and submit</h6></div>
 		<div class="row-fluid">
 			<div class="span12 text-error">Please read policies before you submit. Please refrain<br> from submitting this mark, if you are unsure about the incident.</div>
 		</div>	

@@ -26,6 +26,8 @@ public @Data class Mark {
 	private String reason;
 	private String severity;
 	private String description;
+	private String videoUrl;
+	private String imageUrl;
 	private @Index String countryCode;
 	private String country;
 	private @Index String addressLevel1Code;

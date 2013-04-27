@@ -15,6 +15,8 @@ public @Data class TSRMessage {
 	private String nature;
 	private String severity;
 	private String description;
+	private String videoUrl;
+	private String imageUrl;
 	private Date date;
 	private String location;
 	private long likeCount;

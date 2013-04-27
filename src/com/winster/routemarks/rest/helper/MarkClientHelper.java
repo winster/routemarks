@@ -32,5 +32,12 @@ public class MarkClientHelper {
 			mark.setId(userId+"-"+currentMarkCount);
 		}
 		mark.setLastUpdatedDate(new Date());
+		if(mark.getEmbed() !=null) {
+			if(mark.getEmbed().indexOf("iframe")>-1) {
+				mark.setVideoUrl(mark.getEmbed());
+			}else{
+				mark.setImageUrl(mark.getEmbed());
+			}
+		}
 	}
 }

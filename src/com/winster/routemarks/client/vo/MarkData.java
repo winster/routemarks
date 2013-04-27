@@ -17,6 +17,9 @@ public @Data class MarkData {
 	private String reason;
 	private String severity;
 	private String description;
+	private String embed;
+	private String videoUrl;
+	private String imageUrl;
 	private GeocodeAddressComponents[] address;
 	private long likeCount;
 	private long starCount;
