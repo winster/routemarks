@@ -399,14 +399,26 @@ function attachListenerToInfobox(marker, clonedObj){
     	}
 	});   
 	$(clonedObj).find(".fileupload").fileupload({
+		submit : function(e, data) {
+			$('.mini-layout').fadeTo('slow',.3);
+			$('.mini-layout').addClass("disabledDiv");			
+		},
         done : function(e, data) {
+        	$('.mini-layout').fadeTo('slow',1);
+			$('.mini-layout').removeClass('disabledDiv');
         	$.each(data.files, function (index, file) {
         		$(clonedObj).find(".filename").text(file.name);
             });
-        	$(clonedObj).find(".uploadedImgUrl").text(data.result);        	
+        	$(clonedObj).find(".uploadedImgUrl").text(data.result);
+        	$(clonedObj).find(".filename").show();
+			$(clonedObj).find(".error").hide();
         },
         fail : function(e, data) {
-        	console.log("image upload failed");
+        	$('.mini-layout').fadeTo('slow',1);
+			$('.mini-layout').removeClass('disabledDiv');
+			$(clonedObj).find(".error").text(data.jqXHR.responseText);
+			$(clonedObj).find(".filename").hide();
+			$(clonedObj).find(".error").show();
         }
     });
 }
