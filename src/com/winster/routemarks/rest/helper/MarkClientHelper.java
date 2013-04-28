@@ -35,7 +35,7 @@ public class MarkClientHelper {
 		if(mark.getEmbed() !=null) {
 			if(mark.getEmbed().indexOf("iframe")>-1) {
 				mark.setVideoUrl(mark.getEmbed());
-			}else if(mark.getImageUrl()==null){
+			}else if(mark.getImageUrl()==null || mark.getImageUrl().isEmpty()){
 				mark.setImageUrl(mark.getEmbed());
 			}
 		}
