@@ -48,6 +48,8 @@ public enum ApplicationConstants {
 	COMMUNITY_LOAD_TYPE_RELOAD("reload"),
 	COMMUNITY_LOAD_TYPE_APPEND("append"),
 	
+	CLOUD_STORAGE_BUCKET_NAME("routemarks"),
+	
 	COUNT_ACTIVE_SESSIONS("totalactivesession");
 	
 	private final String value;

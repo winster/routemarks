@@ -398,6 +398,17 @@ function attachListenerToInfobox(marker, clonedObj){
     		);    		
     	}
 	});   
+	$(clonedObj).find(".fileupload").fileupload({
+        done : function(e, data) {
+        	$.each(data.files, function (index, file) {
+        		$(clonedObj).find(".filename").text(file.name);
+            });
+        	$(clonedObj).find(".uploadedImgUrl").text(data.result);        	
+        },
+        fail : function(e, data) {
+        	console.log("image upload failed");
+        }
+    });
 }
 
 /**
@@ -417,10 +428,12 @@ function insertMark(event, marker, address_components){
 	}
 	var description = $(event.target).parent().parent().find(".news").val();
 	var embed = $(event.target).parent().parent().find(".embed").val();
+	var imageUrl = $(event.target).parent().parent().find(".uploadedImgUrl").text();
 	var data = {"location":location,"category":category,
 				"transportation":transportation,
 				"reason":reason,"severity":severity,
-				"description":description, "embed":embed, 
+				"description":description, "embed":embed,
+				"imageUrl":imageUrl,
 				"address":address_components};
 
 	$.post("markfn/insert",JSON.stringify(data))
@@ -1014,10 +1027,10 @@ function createAnonymous(address_components){
 		  data:JSON.stringify(address_components),
 		  contentType:"application/json; charset=utf-8",
 		  success: function(data, textStatus, request){
-			  console.log("successful");
+			  //console.log("user created successfully");
 		  },
 		  error: function (request, textStatus, errorThrown) {
-			  console.log('error while sending request!'+errorThrown);
+			  //console.log('error while creating user '+errorThrown);
 		  }
 		});
 }
