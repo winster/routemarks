@@ -141,9 +141,12 @@
 	    <!-- Placed at the end of the document so the pages load faster -->
 	    <script src="assets/js/ext/jquery-1.9.1.min.js"></script>
 	    <script src="assets/bootstrap/js/bootstrap.min.js"></script>
+	    <script src="assets/js/ext/jquery.ui.widget.js"></script>
+		<script src="assets/js/ext/jquery.iframe-transport.js"></script>
+		<script src="assets/js/ext/jquery.fileupload.js"></script>
 		<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false&libraries=places"></script>
 	  	<script type="text/javascript" src="/_ah/channel/jsapi"></script>
-		<script src="assets/js/infobox.js"></script>
+	  	<script src="assets/js/infobox.js"></script>
 		<script src="assets/js/template.js"></script>
 	  	<script src="assets/js/app.js" ></script>
 	</div> <!-- /container -->	

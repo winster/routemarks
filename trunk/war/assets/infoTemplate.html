@@ -74,7 +74,13 @@
 			<textarea class="embed input-large" rows="2" placeholder="embed youtube video or vimeo video. You can also give any image url."></textarea>
 		</div>
 		<div class="row-fluid text-center"><h5>Or upload image from system</h5></div>
-		<div class="row-fluid text-center"><input type="file"></div>
+		<div class="row-fluid text-center">
+			<input type="file" class="fileupload" data-url="markfn/uploadimg">
+		</div>			
+		<div class="row-fluid text-center">
+			<span class="filename"></span>
+		</div>
+		<input type="hidden" class="uploadedImgUrl">
 	</div>
 	
 	<div class="data-submit">
