@@ -982,7 +982,7 @@ function showPicture(item){
  */
 function starMark(){
 	var starcount = $(this).find(".starcount").text();
-	var markId = $(this).parent().parent().parent().find(".markId").text();
+	var markId = $(this).parent().parent().parent().parent().find(".markId").text();
 	var data = {"type":"star","count":starcount, "markId" :markId};
 	updateMark(data);
 }
@@ -992,7 +992,7 @@ function starMark(){
  */
 function likeMark(){
 	var likecount = $(this).find(".likecount").text();
-	var markId = $(this).parent().parent().parent().find(".markId").text();
+	var markId = $(this).parent().parent().parent().parent().find(".markId").text();
 	var data = {"type":"like","count":likecount, "markId" :markId};
 	updateMark(data);
 }
@@ -1002,7 +1002,7 @@ function likeMark(){
  */
 function dislikeMark(){
 	var dislikecount = $(this).find(".dislikecount").text();
-	var markId = $(this).parent().parent().parent().find(".markId").text();
+	var markId = $(this).parent().parent().parent().parent().find(".markId").text();
 	var data = {"type":"dislike","count":dislikecount, "markId" :markId};
 	updateMark(data);	
 }
