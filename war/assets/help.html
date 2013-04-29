@@ -36,81 +36,131 @@
 	<div class="navbar navbar-inverse navbar-fixed-top masthead">
 		<div class="row-fluid">
 			<div class="span10">
-				<a href="/" style="text-decoration: none;"><span class="logo">ROUTEMARKS</span></a>
+				<a href="/" style="text-decoration: none;"><img src="/assets/img/banner.png"></a>
 			</div>
 		</div> 
     </div>
     <div class="container-fluid app-container">
 		<section>		
-			<p>Please have a look at the video tutorial given in <i>about</i> page. In this section the functionalities of each screen is explained.
-			<h4>Home screen</h4>
+			<p>Please have a look at the video tutorial given in <i>about</i> page. In this section the features of each section of the screen is explained.
+			<h4>Search</h4>
 			<p>Helps to check the safety of the route based on the start and stop location given by the user. The route is considered as safe when you see lesser marks on the route.
-			By default only those marks which are created on the current date will be displayed. But user can choose following options for more details. <br>
-			a) Yesterday <br>
-			b) Last week <br>
-			c) Last month <br>
-			d) Last year <br>
-			e) All<br>		
-			To get a tabular safety report, click on <i>Get report</i> button.
-			</p>	
+			Default result will have the marks which have been created for the last year. But user can choose following options for more details from the blue drop down box right below <strong>View MarksM</strong> heading. <br>
+			a) Today <br>
+			b) Yesterday <br>
+			c) Last week <br>
+			d) Last month <br>
+			e) Last year <br>
+			f) All<br>		
+			Also get a tabular report by <button type="button" class="btn btn-primary btn-small">Get Report <i class="icon-forward"></i></button> button.
+			</p>
 			<h4>Report screen</h4>
 			<p>Report screen will display the number of marks which are created in the given bounds. Values of the bounds are decided by the start and stop locations given by the user
 			in the home screen. Mark counts are displayed in a tabular format for current day, yesterday, last week, last month, last year and all.		
 			</p>
-			<h4>Community screen</h4>
-			<p>When a user lands on the community page, the room location will be defaulted to the country on which he/she located. All the marks which are created in that country will also be 
-			displayed. And new marks will be displayed as and when they are created. User can choose a different room he/she likes. When a new location is entered, all the marks which are created in that
-			location will be displayed to him/her. And when new marks are created, that will also be presented to the user. Users can like, dislike or star any marks. Star is used in a situation
-			when she/he finds the mark very useful. 		
+			<h4>Community</h4>
+			<p>Messages from the community are displayed to the right of the page. Default location will be the current country of the user. All the marks which are created in that country will be 
+			displayed and new marks will be added to the list as and when they are created. User can choose a different location to see the marks which are created in that location.
+			Users can authenticate each mark by clicking on any of the following three buttons. <br>
+			a) Eye witness <abbr title="eye witness"><i class="icon-eye-open"></i></abbr> <br>
+			b) I concur <abbr title="I concur"><i class="icon-bell"></i></abbr> <br> 
+			c) Fake information <abbr title="fake information"><i class="icon-trash"></i></abbr> <br>
 			</p>
-			<h4>Mark screen</h4>
-			<p>Mark page is also having a field which accepts any place name. By default the map in the page will be centered with the current location of the user; provided he has enabled browser location.
-			User can choose his place from the field where she/he wants to create the mark. In order to create a mark, first of all, user has to click on a particular point on the map. Then a red mark
-			will be displayed on the map. User can remove the red mark by a mere right click on it. As a second step to create a mark, user has to click on the red mark which will pops up an information window.
-			The window will have drop down boxes for category, transport mode, reason/nature and severity. The values in each of the select boxes are given below.<br>
-			a) Category <br>
-			&nbsp; 1. Accident<br>
-			&nbsp; 2. Natural disaster<br>
-			b) Transport mode (Accident)<br>
-			&nbsp; 1. BiCycle<br>
-			&nbsp; 2. Car<br>
-			&nbsp; 3. Motor Cycle<br>
-			&nbsp; 4. Public Transport<br>
-			&nbsp; 5. SUV<br>
-			&nbsp; 6. Truck<br>
-			&nbsp; 7. Train<br>
-			c-1) Reason (Accident) <br>
-			&nbsp; 1. Over speed<br>
-			&nbsp; 2. Reckless driving<br>
-			&nbsp; 3. Sharp Curve<br>
-			&nbsp; 4. Traffic rule violation<br>
-			&nbsp; 5. Wrong message board<br>
-			&nbsp; 6. Ice road<br>
-			&nbsp; 7. Bad road<br>
-			&nbsp; 8. Unknown<br>
-			c-2) Reason (Natural disaster) <br>
-			&nbsp; 1. Avalanche and Landslides<br>
-			&nbsp; 2. Earthquake<br>
-			&nbsp; 3. Hurricane or Typhoon<br>
-			&nbsp; 4. Tornado<br>
-			&nbsp; 5. Tsunami<br>
-			&nbsp; 6. Volcanic Eruptions<br>
-			d) Severity <br>
-			&nbsp; 1. Critical<br>
-			&nbsp; 2. Major<br>
-			&nbsp; 3. Minor<br>
-			<br>
-			Based on the cateogry, transport mode, nature/reason and severity user can choose any values. User can also add some meaningful comment in the description field. Upon submitting the button user
-			will be navigated to next screen in the same window. Just to ensure that the user is not a robot, he/she has to fill a basic mathematical formula and complete the process by clicking submit button which 
-			will create a new marker. When the mark is created he will also get notified in the page.  		
+			<h4>Map</h4>
+			<p>Map displays the RouteMarks along with the route. A mark can be an accident location or a natural disaster affected area. Marks will be displayed as red spots on the map. 
+			User can view details of a mark by clicking on it. The then opened info window will display the parameters that user has saved while creating the mark along with the image/video.
+			In order to create a RouteMark, user has to click on the map which makes the map to zoom in to the desired level. Now user has to click on the exact location where he wants to create the mark.  
+			Then a red mark will be displayed on the map. User can remove the red mark by a mere right click on it. If user clicks (left click) on the red mark, an information window will pop up.
+			The info window has drop down boxes for category, transport mode, reason/nature and severity. The values in each of the select boxes are given below.<br>
+			<table class="table table-hover">
+				<thead>
+					<tr>
+						<th style="width:20%">Category</th>
+						<th style="width:20%">Transport mode (Accident)</th>
+						<th style="width:20%">Reason (Accident)</th>
+						<th style="width:20%">Nature (Natural disaster)</th>
+						<th style="width:20%">Severity</th>
+					</tr>
+				</thead>
+	            <tbody>
+	                <tr class="success">
+	                  <td>Accident</td>
+	                  <td>BiCycle</td>
+	                  <td>Over speed</td>
+	                  <td>Avalanche and Landslides</td>
+	                  <td>Critical</td>
+	                </tr>
+	                <tr class="success">
+	                  <td>Natural disaster</td>
+	                  <td>Car</td>
+	                  <td>Reckless driving</td>
+	                  <td>Earthquake</td>
+	                  <td>Major</td>
+	                </tr>	    
+	                <tr class="success">
+	                  <td></td>
+	                  <td>Motor Cycle</td>
+	                  <td>Sharp Curve</td>
+	                  <td>Hurricane or Typhoon</td>
+	                  <td>Minor</td>
+	                </tr>	    
+	                <tr class="success">
+	                  <td></td>
+	                  <td>Public Transport</td>
+	                  <td>Traffic rule violation</td>
+	                  <td>Tornado</td>
+	                  <td></td>
+	                </tr>	     
+	                <tr class="success">
+	                  <td></td>
+	                  <td>SUV</td>
+	                  <td> Wrong message board</td>
+	                  <td>Tsunami</td>
+	                  <td></td>
+	                </tr>	     
+	                <tr class="success">
+	                  <td></td>
+	                  <td>Truck</td>
+	                  <td>Ice road</td>
+	                  <td>Volcanic Eruptions</td>
+	                  <td></td>
+	                </tr>	     
+	                <tr class="success">
+	                  <td></td>
+	                  <td>Train</td>
+	                  <td>Bad road</td>
+	                  <td>Other</td>
+	                  <td></td>
+	                </tr>     
+	                <tr class="success">
+	                  <td></td>
+	                  <td></td>
+	                  <td>Other</td>
+	                  <td></td>
+	                  <td></td>
+	                </tr>	                
+	            </tbody>
+	          </table>
+			Based on the cateogry, transport mode, nature/reason and severity user can choose any values. User can also add some meaningful comment in the description field. 
+			Continue operation by selecting next button <button type="button" class="btn btn-small btn-info"> <i class="icon-forward"></i> Next</button>. User can share any video(youtube/vimeo) or image url or even upload an image to the application. 
+			Click <button type="button" class="btn btn-small btn-info"> <i class="icon-forward"></i> Next</button>. Just to ensure that the user is not a robot, fill in the basic mathematical formula and complete the process by clicking submit button which 
+			will create a new ROUTEMARK. When the mark is created user will get notified via a message.  		
 			</p>
-			<h4>Account screen</h4>
-			<p>There are two ways in which user can reach account page. Either by clicking on the login/username link or directly selecting the account tab. If the user is not logged in, the page will be
-			rendered with various open authentication service providers. User can choose any of these services and login to RouteMarks. When he/she logs in, the page will display a green card which contains all of the user
+			<h4>Login / View Account</h4>
+			<p>By clicking on the ID Card link, a login dialog will pop up which has various open authentication service providers listed. User can choose any of these services and login to RouteMarks. When the user logs in, the page will display a green card which contains all of the user
 			activities, points, etc. 
 			</p>
+			<h4>Help screen</h4>
+			<p>Describes the features of the application as well as its behaviour.</p>
+			<h4>Disclaimer screen</h4>
+			<p>Warranties, limitations and provisions of the application.</p>
+			<h4>Policies screen</h4>
+			<p>Privacy policies of the application.</p>
+			<h4>Feedback screen</h4>
+			<p>User can provide feedback by completing the feedback form.</p>
 			<h4>About screen</h4>
 			<p>About screen has a video tutorial on how to use this application.</p>
+			
 		</section>		
 	</div> <!-- /container -->
 	<div class="footer">

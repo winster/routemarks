@@ -14,7 +14,6 @@ import org.apache.commons.fileupload.FileItemIterator;
 import org.apache.commons.fileupload.FileItemStream;
 import org.apache.commons.fileupload.FileUploadBase.SizeLimitExceededException;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
-import org.apache.commons.io.IOUtils;
 
 import com.google.appengine.api.files.AppEngineFile;
 import com.google.appengine.api.files.FileService;
@@ -112,19 +111,19 @@ public class Mark extends HttpServlet {
 				        	log.warning("Got a form field: " + item.getFieldName());
 				        } else {
 				        	log.warning("Got an uploaded file: " + item.getFieldName() +", name = " + item.getName());				        	
-				        	byte[] imageData = IOUtils.toByteArray(stream);				        	
-				            /*ImagesService imagesService = ImagesServiceFactory.getImagesService();
+				        	/*byte[] imageData = IOUtils.toByteArray(stream);				        	
+				            ImagesService imagesService = ImagesServiceFactory.getImagesService();
 				            Image oldImage = ImagesServiceFactory.makeImage(imageData);
 				            Transform resize = ImagesServiceFactory.makeResize(200, 300);
 				            Image newImage = imagesService.applyTransform(resize, oldImage);
-				            byte[] newImageData = newImage.getImageData();*/
+				            byte[] newImageData = newImage.getImageData();
 				            // Wrap a byte array into a buffer
 				            ByteBuffer buf = ByteBuffer.wrap(imageData);
 				            // Retrieve bytes between the position and limit
 				            // (see Putting Bytes into a ByteBuffer)
 				            imageData = new byte[buf.remaining()];
 				            // transfer bytes from this buffer into the given destination array
-				            buf.get(imageData, 0, imageData.length);
+				            buf.get(imageData, 0, imageData.length);*/
 
 				            FileService fileService = FileServiceFactory.getFileService();
 						    GSFileOptionsBuilder optionsBuilder = new GSFileOptionsBuilder()
@@ -137,7 +136,12 @@ public class Mark extends HttpServlet {
 						    // Open a channel to write to it
 						    boolean lock = true;
 						    FileWriteChannel writeChannel = fileService.openWriteChannel(writableFile, lock);
-						    writeChannel.write(buf);
+						 // copy byte stream from request to channel
+				            byte[] buffer = new byte[10000];
+				            int len;
+				            while ((len = stream.read(buffer)) > 0) {
+				                writeChannel.write(ByteBuffer.wrap(buffer, 0, len));
+				            }				            
 				            writeChannel.closeFinally();
 						    resp.getWriter().append("http://storage.googleapis.com/"+BUCKET_NAME+"/"+FILE_NAME);
 							resp.setStatus(HttpServletResponse.SC_OK);
